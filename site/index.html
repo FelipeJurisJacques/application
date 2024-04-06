@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="../target/application-1.0-SNAPSHOT.wasm.js"></script>
+</head>
+
+<body>
+    <script>
+        const origin = new URL(
+            '/target/application-1.0-SNAPSHOT.wasm',
+            window.location.origin
+        )
+        WebAssembly.instantiateStreaming(fetch(origin), wasmImports)
+            .then(obj => {
+                console.log(obj.instance.exports)
+            })
+            .catch((err) => document.write(err + '<p>Missing <a href="https://github.com/i-net-software/JWebAssembly/wiki/browser">Browser Support</a>'));
+    </script>
+</body>
+
+</html>
