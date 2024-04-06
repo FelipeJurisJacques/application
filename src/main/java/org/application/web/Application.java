@@ -1,5 +1,7 @@
 import de.inetsoftware.jwebassembly.api.annotation.Export;
 // import de.inetsoftware.jwebassembly.web.dom.Document;
+// import de.inetsoftware.jwebassembly.web.dom.HTMLElement;
+// import de.inetsoftware.jwebassembly.web.dom.Text;
 // import de.inetsoftware.jwebassembly.web.dom.Window;
 
 /**
