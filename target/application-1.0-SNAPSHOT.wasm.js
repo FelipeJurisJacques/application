@@ -1,7 +1,8 @@
 'use strict';var wasmImports = {
 console:{
-_error:(v) => { const l = []; for (let i of v[2]) { l.push(String.fromCharCode(i)); } console.error(l.join('')); },
-_log:(v) => { const l = []; for (let i of v[2]) { l.push(String.fromCharCode(i)); } console.log(l.join('')); }
+_logBoolean:(v) => { console.log(v == 1); },
+_logString:(v) => { const l = []; for (let i of v[2]) { l.push(String.fromCharCode(i)); } console.log(l.join('')); },
+_errorString:(v) => { const l = []; for (let i of v[2]) { l.push(String.fromCharCode(i)); } console.error(l.join('')); }
 },
 NonGC:{
 array_new_u16:(l)=>Object.seal({0:440,1:0,2:Object.seal(new Array(l).fill(null))}),
@@ -37,6 +38,9 @@ new_java_lang_Class:() => Object.seal({0:1280,1:0,2:0,3:0}),
 new_java_util_Collections$EmptyList:() => Object.seal({0:2176,1:0,2:0}),
 set_i32:(a,v,i) => a[i]=v,
 array_new_java_lang_Object:(l)=>Object.seal({0:1656,1:0,2:Object.seal(new Array(l).fill(null))})
+},
+window:{
+_document:() => { return window.document }
 },
 System:{
 arraycopy:(src,srcPos,dest,destPos,length)=>{if(destPos<srcPos){for (var i=0;i<length;i++)dest[i+destPos]=src[i+srcPos];}else{for (var i=length-1;i>=0;i--)dest[i+destPos]=src[i+srcPos];}}
