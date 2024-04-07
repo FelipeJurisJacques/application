@@ -1,4 +1,4 @@
-org\application\web\translations\Buff.class
 Application.class
+org\application\web\translations\Buffer.class
 org\application\web\translations\Native.class
 org\application\web\elements\Element.class

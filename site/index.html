@@ -14,14 +14,16 @@
         class Message {
             static #buffer = ''
             static rx() { }
-            static tx(asc) {
+            static tx(value) {
                 let result = ''
                 for (let i = 3; i >= 0; i--) {
                     result += String.fromCharCode((value >> (8 * i)) & 0xFF)
                 }
-                console.log(result)
+                this.#buffer = `${this.#buffer}{result}`
             }
         }
+        window.tx = Message.tx
+        window.rx = Message.rx
         WebAssembly.instantiateStreaming(fetch(origin), wasmImports).then(obj => {
             console.log(obj.instance.exports)
             console.log(obj.instance.exports.main())

@@ -1,4 +1,4 @@
-import org.application.web.translations.Buff;
+import org.application.web.translations.Buffer;
 
 import de.inetsoftware.jwebassembly.api.annotation.Export;
 // import de.inetsoftware.jwebassembly.web.dom.Document;
@@ -12,9 +12,10 @@ import de.inetsoftware.jwebassembly.api.annotation.Export;
 public class Application {
 
     @Export
-    public static void main() {
-        Buff message = new Buff();
-        message.tx("Hello World, this text come from WebAssembly.");
+    public static String main() {
+        return "Hello World, this text come from WebAssembly.";
+        // Buffer message = new Buffer();
+        // message.tx("Hello World, this text come from WebAssembly.");
         // Window.document();
         // Document document = Window.document();
         // HTMLElement div = document.createElement("div");
