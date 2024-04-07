@@ -1,3 +1,4 @@
+org\application\web\translations\Console.class
 Application.class
 org\application\web\translations\Buffer.class
 org\application\web\translations\Native.class

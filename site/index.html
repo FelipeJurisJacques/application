@@ -11,22 +11,8 @@
             '/target/application-1.0-SNAPSHOT.wasm',
             window.location.origin
         )
-        class Message {
-            static #buffer = ''
-            static rx() { }
-            static tx(value) {
-                let result = ''
-                for (let i = 3; i >= 0; i--) {
-                    result += String.fromCharCode((value >> (8 * i)) & 0xFF)
-                }
-                this.#buffer = `${this.#buffer}{result}`
-            }
-        }
-        window.tx = Message.tx
-        window.rx = Message.rx
-        WebAssembly.instantiateStreaming(fetch(origin), wasmImports).then(obj => {
-            console.log(obj.instance.exports)
-            console.log(obj.instance.exports.main())
+        WebAssembly.instantiateStreaming(fetch(origin), wasmImports).then(result => {
+            result.instance.exports.main()
         }).catch(error => {
             console.error(error)
         })
