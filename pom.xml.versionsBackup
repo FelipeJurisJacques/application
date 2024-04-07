@@ -11,16 +11,16 @@
         <exec.mainClass>org.application.web.Application</exec.mainClass>
     </properties>
     <repositories>
-		<repository>
-		    <id>jitpack.io</id>
-		    <url>https://jitpack.io</url>
-		</repository>
-	</repositories>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+    </repositories>
     <dependencies>
         <dependency>
             <groupId>com.github.i-net-software</groupId>
             <artifactId>jwebassembly-api</artifactId>
-            <version>0.3</version>
+            <version>master-SNAPSHOT</version>
         </dependency>
     </dependencies>
     <build>

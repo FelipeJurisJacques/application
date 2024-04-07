@@ -11,11 +11,23 @@
             '/target/application-1.0-SNAPSHOT.wasm',
             window.location.origin
         )
-        WebAssembly.instantiateStreaming(fetch(origin), wasmImports)
-            .then(obj => {
-                console.log(obj.instance.exports)
-            })
-            .catch((err) => document.write(err + '<p>Missing <a href="https://github.com/i-net-software/JWebAssembly/wiki/browser">Browser Support</a>'));
+        class Message {
+            static #buffer = ''
+            static rx() { }
+            static tx(asc) {
+                let result = ''
+                for (let i = 3; i >= 0; i--) {
+                    result += String.fromCharCode((value >> (8 * i)) & 0xFF)
+                }
+                console.log(result)
+            }
+        }
+        WebAssembly.instantiateStreaming(fetch(origin), wasmImports).then(obj => {
+            console.log(obj.instance.exports)
+            console.log(obj.instance.exports.main())
+        }).catch(error => {
+            console.error(error)
+        })
     </script>
 </body>
 
