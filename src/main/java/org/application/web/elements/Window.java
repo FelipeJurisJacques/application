@@ -2,13 +2,8 @@ package org.application.web.elements;
 
 import org.application.web.libs.Node;
 
-/**
- *
- * @author felipe
- */
-public class Element extends Node {
-
-    public Element(Object pointer) {
+public class Window extends Node {
+    private Window(Object pointer) {
         super(pointer);
     }
 }

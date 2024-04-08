@@ -1,5 +1,7 @@
-import org.application.web.translations.Console;
-import de.inetsoftware.jwebassembly.api.annotation.Import;
+import org.application.web.libs.Console;
+import org.application.web.elements.Body;
+import org.application.web.elements.Document;
+import org.application.web.elements.Paragraph;
 import de.inetsoftware.jwebassembly.api.annotation.Export;
 
 /**
@@ -11,13 +13,12 @@ public class Application {
     public static void main() {
         try {
             Console.log("Hello World, this text come from WebAssembly.");
-            Object document = Application._document();
+            Paragraph p = new Paragraph();
+            p.setContent("Test");
+            Body body = Document.getBody();
+            body.setAppend(p);
         } catch (Exception error) {
             Console.error(error);
         }
     }
-
-    
-    @Import(module = "window", js = "() => { return window.document }")
-    private static native Object _document();
 }

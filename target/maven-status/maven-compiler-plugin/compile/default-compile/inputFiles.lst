@@ -1,4 +1,9 @@
 C:\Users\felip\workspace\application\src\main\java\org\application\web\Application.java
+C:\Users\felip\workspace\application\src\main\java\org\application\web\elements\Window.java
 C:\Users\felip\workspace\application\src\main\java\org\application\web\elements\Element.java
-C:\Users\felip\workspace\application\src\main\java\org\application\web\translations\Native.java
-C:\Users\felip\workspace\application\src\main\java\org\application\web\translations\Console.java
+C:\Users\felip\workspace\application\src\main\java\org\application\web\libs\Console.java
+C:\Users\felip\workspace\application\src\main\java\org\application\web\elements\Body.java
+C:\Users\felip\workspace\application\src\main\java\org\application\web\elements\Document.java
+C:\Users\felip\workspace\application\src\main\java\org\application\web\libs\Node.java
+C:\Users\felip\workspace\application\src\main\java\org\application\web\elements\Paragraph.java
+C:\Users\felip\workspace\application\src\main\java\org\application\web\libs\Native.java

@@ -1,4 +1,9 @@
-org\application\web\translations\Console.class
+org\application\web\elements\Document.class
+org\application\web\elements\Paragraph.class
+org\application\web\libs\Native.class
+org\application\web\libs\Node.class
+org\application\web\elements\Body.class
+org\application\web\libs\Console.class
 Application.class
-org\application\web\translations\Native.class
+org\application\web\elements\Window.class
 org\application\web\elements\Element.class
