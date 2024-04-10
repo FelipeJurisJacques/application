@@ -6,18 +6,11 @@ public class Paragraph extends Element {
         super(pointer);
     }
 
-    public Paragraph()
-    {
-        super(getDocumentCreateElement(getDocument(), 'p'));
+    public Paragraph() {
+        super(getDocumentCreateElement('p'));
     }
 
-    public void setContent(String value)
-    {
-        this.setInnerText(value);
-    }
-
-    public void setInnerText(String value)
-    {
+    public void setContent(String value) {
         setHtmlElementInnerText(this.pointer, value);
     }
 }

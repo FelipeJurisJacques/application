@@ -13,10 +13,16 @@ public class Application {
     public static void main() {
         try {
             Console.log("Hello World, this text come from WebAssembly.");
-            Paragraph p = new Paragraph();
-            p.setContent("Test");
-            Body body = Document.getBody();
-            body.setAppend(p);
+            // Paragraph p = new Paragraph();
+            // p.setContent("Test");
+            // p.setAttribute("class", "test");
+            // Body body = Document.getBody();
+            // body.setAppend(p);
+            // p.getAttribute("class");
+            String part = " o teste";
+            String tes = "testando";
+            String test = tes + part;
+            Console.log(test);
         } catch (Exception error) {
             Console.error(error);
         }

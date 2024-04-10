@@ -6,27 +6,31 @@ package org.application.web.libs;
  */
 public class Console extends Native {
 
+    public static void log(char value) {
+        setConsoleLogChar(value);
+    }
+
     public static void log(int value) {
-        Console.logInteger(value);
+        setConsoleLogInteger(value);
     }
 
     public static void log(Object value) {
-        Console.logObject(value);
+        setConsoleLogObject(value);
     }
 
     public static void log(boolean value) {
-        Console.logBoolean(value ? 1 : 0);
+        setConsoleLogBoolean(value);
     }
 
     public static void log(String value) {
-        Console.logString(Console.stringToAscii(value));
+        setConsoleLogString(value);
     }
 
     public static void error(String value) {
-        Console.errorString(Console.stringToAscii(value));
+        setConsoleErrorString(value);
     }
 
     public static void error(Exception value) {
-        Console.errorString(Console.stringToAscii(value.getMessage()));
+        setConsoleErrorString(value.getMessage());
     }
 }
