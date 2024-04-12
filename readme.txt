@@ -3,8 +3,10 @@ mvn clean package
 
 atualizar:
 mvn versions:display-dependency-updates
-mvn versions:use-latest-versions
 mvn clean install -U
+
+nao utilizar o comando a baixo (quebra a versao):
+mvn versions:use-latest-versions
 
 notacoes:
 @Export

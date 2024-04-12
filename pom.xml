@@ -20,7 +20,7 @@
         <dependency>
             <groupId>com.github.i-net-software</groupId>
             <artifactId>jwebassembly-api</artifactId>
-            <version>0.3</version>
+            <version>v0.4</version>
         </dependency>
     </dependencies>
     <build>
