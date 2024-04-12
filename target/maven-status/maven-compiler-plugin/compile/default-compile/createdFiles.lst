@@ -2,6 +2,7 @@ org\application\web\elements\Document.class
 org\application\web\elements\Paragraph.class
 org\application\web\libs\Native.class
 org\application\web\libs\Node.class
+org\application\web\widgets\Widget.class
 org\application\web\elements\Div.class
 org\application\web\elements\Body.class
 org\application\web\libs\Console.class

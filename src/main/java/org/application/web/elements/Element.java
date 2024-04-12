@@ -16,7 +16,8 @@ public class Element extends Node {
         return getHtmlElementAttribute(this.pointer, name);
     }
 
-    public void setAttribute(String name, String value) {
+    public Element setAttribute(String name, String value) {
         setHtmlElementAttribute(this.pointer, name, value);
+        return this;
     }
 }

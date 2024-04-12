@@ -1,7 +1,6 @@
 import org.application.web.libs.Console;
-import org.application.web.elements.Body;
+import org.application.web.widgets.Widget;
 import org.application.web.elements.Document;
-import org.application.web.elements.Paragraph;
 import de.inetsoftware.jwebassembly.api.annotation.Export;
 
 /**
@@ -12,13 +11,9 @@ public class Application {
     @Export
     public static void main() {
         try {
-            Console.log("Hello World, this text come from WebAssembly.");
-            Paragraph p = new Paragraph();
-            p.setContent("Test");
-            p.setAttribute("class", "test");
-            Body body = Document.getBody();
-            body.setAppend(p);
-            Console.log(p.getAttribute("class"));
+            Document.getBody().setAppend(Widget.create('p')
+                    .setContent("Hello World, this text come from WebAssembly.")
+                    .setAttribute("class", "test"));
         } catch (Exception error) {
             Console.error(error);
         }

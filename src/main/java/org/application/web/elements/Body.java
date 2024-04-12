@@ -6,7 +6,8 @@ public class Body extends Element {
         super(pointer);
     }
 
-    public void setAppend(Element element) {
+    public Body setAppend(Element element) {
         setHtmlElementAppend(this.pointer, element.getPointer());
+        return this;
     }
 }
