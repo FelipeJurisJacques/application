@@ -13,8 +13,7 @@ public class Element extends Node {
     }
 
     public String getAttribute(String name) {
-        getHtmlElementAttribute(this.pointer, name);
-        return "";
+        return getHtmlElementAttribute(this.pointer, name);
     }
 
     public void setAttribute(String name, String value) {

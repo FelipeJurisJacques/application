@@ -18,14 +18,7 @@ public class Application {
             p.setAttribute("class", "test");
             Body body = Document.getBody();
             body.setAppend(p);
-            // p.getAttribute("class");
-            // StringBuilder test = new StringBuilder();
-            // test.append("testando");
-            // test.append(" o teste");
-            String test = "testando";
-            test += " o teste";
-            // String test = tes + part;
-            Console.log(test);
+            Console.log(p.getAttribute("class"));
         } catch (Exception error) {
             Console.error(error);
         }

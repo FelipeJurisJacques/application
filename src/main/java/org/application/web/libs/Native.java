@@ -19,11 +19,11 @@ public abstract class Native {
     }
 
     protected static void setConsoleLogString(String value) {
-        _setConsoleLogString(_stringToAscii(value));
+        _setConsoleLogString(_toString(value));
     }
 
     protected static void setConsoleErrorString(String value) {
-        _setConsoleErrorString(_stringToAscii(value));
+        _setConsoleErrorString(_toString(value));
     }
 
     @Import(module = "native", name = "setConsoleLogInteger", js = "v => console.log(v)")
@@ -35,14 +35,14 @@ public abstract class Native {
     @Import(module = "native", name = "setConsoleLogBoolean", js = "v => console.log(v == 1)")
     protected static native void _setConsoleLogBoolean(int value);
 
-    @Import(module = "native", name = "setConsoleLogString", js = "v => console.log(v.asciiToString())")
-    private static native void _setConsoleLogString(int[] value);
+    @Import(module = "native", name = "setConsoleLogString", js = "v => console.log(v)")
+    private static native void _setConsoleLogString(Object value);
 
     @Import(module = "native", name = "setConsoleLogChar", js = "v => console.log(String.fromCharCode(v))")
     private static native void _setConsoleLogChar(int value);
 
-    @Import(module = "native", name = "setConsoleErrorString", js = "v => console.error(v.asciiToString())")
-    protected static native void _setConsoleErrorString(int[] value);
+    @Import(module = "native", name = "setConsoleErrorString", js = "v => console.error(v)")
+    protected static native void _setConsoleErrorString(Object value);
 
     // WINDOW
 
@@ -52,7 +52,7 @@ public abstract class Native {
     // ELEMENTS
 
     protected static void setHtmlElementInnerText(Object pointer, String value) {
-        _setHtmlElementInnerText(pointer, _stringToAscii(value));
+        _setHtmlElementInnerText(pointer, _toString(value));
     }
 
     protected static Object getDocumentCreateElement(char name) {
@@ -60,7 +60,7 @@ public abstract class Native {
     }
 
     protected static Object getDocumentCreateElement(String name) {
-        return _getDocumentCreateElement(_stringToAscii(name));
+        return _getDocumentCreateElement(_toString(name));
     }
 
     protected static Object getDocumentCreateElement(Object pointer, char name) {
@@ -68,15 +68,15 @@ public abstract class Native {
     }
 
     protected static Object getDocumentCreateElement(Object pointer, String name) {
-        return _getDocumentCreateElement(pointer, _stringToAscii(name));
+        return _getDocumentCreateElement(pointer, _toString(name));
     }
 
     protected static String getHtmlElementAttribute(Object pointer, String name) {
-        return _asciiToString(_getHtmlElementAttribute(pointer, _stringToAscii(name)));
+        return _asciiToString(_getHtmlElementAttribute(pointer, _toString(name)));
     }
 
     protected static void setHtmlElementAttribute(Object pointer, String name, String value) {
-        _setHtmlElementAttribute(pointer, _stringToAscii(name), _stringToAscii(value));
+        _setHtmlElementAttribute(pointer, _toString(name), _toString(value));
     }
 
     @Import(module = "native", name = "getDocument", js = "() => document")
@@ -91,35 +91,35 @@ public abstract class Native {
     @Import(module = "native", name = "getObjectAttribute", js = "(o, p) => o[p.asciiToString()]")
     private static native Object _getObjectAttribute(Object pointer, int[] value);
 
-    @Import(module = "native", name = "getHtmlElementAttribute", js = "(e, n) => e.getAttribute(n.asciiToString())")
-    private static native Object _getHtmlElementAttribute(Object pointer, int[] name);
+    @Import(module = "native", name = "getHtmlElementAttribute", js = "(e, n) => e.getAttribute(n)")
+    private static native Object _getHtmlElementAttribute(Object pointer, Object name);
 
-    @Import(module = "native", name = "setHtmlElementAttribute", js = "(e, n, v) => e.setAttribute(n.asciiToString(), v.asciiToString())")
-    private static native void _setHtmlElementAttribute(Object pointer, int[] name, int[] value);
+    @Import(module = "native", name = "setHtmlElementAttribute", js = "(e, n, v) => e.setAttribute(n, v)")
+    private static native void _setHtmlElementAttribute(Object pointer, Object name, Object value);
 
     @Import(module = "native", name = "getDocumentCreateElement1", js = "n => document.createElement(String.fromCharCode(n))")
     private static native Object _getDocumentCreateElement(int name);
 
-    @Import(module = "native", name = "getDocumentCreateElement2", js = "n => document.createElement(n.asciiToString())")
-    private static native Object _getDocumentCreateElement(int[] name);
+    @Import(module = "native", name = "getDocumentCreateElement2", js = "n => document.createElement(n)")
+    private static native Object _getDocumentCreateElement(Object name);
 
     @Import(module = "native", name = "getDocumentCreateElement3", js = "(e, n) => e.createElement(String.fromCharCode(n))")
     private static native Object _getDocumentCreateElement(Object pointer, int name);
 
-    @Import(module = "native", name = "getDocumentCreateElement4", js = "(o, n) => o.createElement(n.asciiToString())")
-    private static native Object _getDocumentCreateElement(Object pointer, int[] name);
+    @Import(module = "native", name = "getDocumentCreateElement4", js = "(o, n) => o.createElement(n)")
+    private static native Object _getDocumentCreateElement(Object pointer, Object name);
 
-    @Import(module = "native", name = "setHtmlElementInnerText", js = "(o, v) => o.innerText = v.asciiToString()")
-    private static native Object _setHtmlElementInnerText(Object pointer, int[] value);
+    @Import(module = "native", name = "setHtmlElementInnerText", js = "(o, v) => o.innerText = v")
+    private static native Object _setHtmlElementInnerText(Object pointer, Object value);
 
     // TRADUCAO
 
-    private static int[] _stringToAscii(String value) {
+    private static Object _toString(String value) {
         int[] result = new int[value.length()];
         for (int i = 0; i < value.length(); i++) {
             result[i] = (int) value.charAt(i);
         }
-        return result;
+        return _setString(result);
     }
 
     private static String _asciiToString(Object pointer) {
@@ -127,17 +127,19 @@ public abstract class Native {
         if (length > 0) {
             String result = "";
             for (int i = 0; i < length; i++) {
-                // result += (char) _getStringAscii(pointer, i);
+                result += (char) _getChar(pointer, i);
             }
-            Console.log(result);
-            // return result;
+            return result;
         }
         return "";
     }
 
+    @Import(module = "native", name = "getChar", js = "(s, i) => s.charCodeAt(i)")
+    private static native int _getChar(Object pointer, int index);
+
     @Import(module = "native", name = "getStringLength", js = "s => s.length")
     private static native int _getStringLength(Object pointer);
 
-    @Import(module = "native", name = "getStringAscii", js = "(s, i) => s.charCodeAt(i)")
-    private static native int _getStringAscii(Object pointer, int index);
+    @Import(module = "native", name = "setString", js = "v => { const l = []; for (let a of v[2]) { l.push(String.fromCharCode(a)); } return l.join(''); }")
+    private static native Object _setString(int[] value);
 }
