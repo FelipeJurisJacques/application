@@ -51,6 +51,10 @@ public abstract class Native {
 
     // ELEMENTS
 
+    protected static String getHtmlElementInnerText(Object pointer) {
+        return _getString(_getHtmlElementInnerText(pointer));
+    }
+
     protected static void setHtmlElementInnerText(Object pointer, String value) {
         _setHtmlElementInnerText(pointer, _toString(value));
     }
@@ -72,7 +76,7 @@ public abstract class Native {
     }
 
     protected static String getHtmlElementAttribute(Object pointer, String name) {
-        return _asciiToString(_getHtmlElementAttribute(pointer, _toString(name)));
+        return _getString(_getHtmlElementAttribute(pointer, _toString(name)));
     }
 
     protected static void setHtmlElementAttribute(Object pointer, String name, String value) {
@@ -97,6 +101,12 @@ public abstract class Native {
     @Import(module = "native", name = "setHtmlElementAttribute", js = "(e, n, v) => e.setAttribute(n, v)")
     private static native void _setHtmlElementAttribute(Object pointer, Object name, Object value);
 
+    @Import(module = "native", name = "getHtmlElementInnerText", js = "e => e.innerText")
+    private static native Object _getHtmlElementInnerText(Object pointer);
+
+    @Import(module = "native", name = "setHtmlElementInnerText", js = "(o, v) => o.innerText = v")
+    private static native Object _setHtmlElementInnerText(Object pointer, Object value);
+
     @Import(module = "native", name = "getDocumentCreateElement1", js = "n => document.createElement(String.fromCharCode(n))")
     private static native Object _getDocumentCreateElement(int name);
 
@@ -109,9 +119,6 @@ public abstract class Native {
     @Import(module = "native", name = "getDocumentCreateElement4", js = "(o, n) => o.createElement(n)")
     private static native Object _getDocumentCreateElement(Object pointer, Object name);
 
-    @Import(module = "native", name = "setHtmlElementInnerText", js = "(o, v) => o.innerText = v")
-    private static native Object _setHtmlElementInnerText(Object pointer, Object value);
-
     // TRADUCAO
 
     private static Object _toString(String value) {
@@ -122,7 +129,7 @@ public abstract class Native {
         return _setString(result);
     }
 
-    private static String _asciiToString(Object pointer) {
+    private static String _getString(Object pointer) {
         int length = _getStringLength(pointer);
         if (length > 0) {
             String result = "";

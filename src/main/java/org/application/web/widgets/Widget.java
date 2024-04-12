@@ -22,11 +22,17 @@ public class Widget extends Element {
         return this;
     }
 
-    // public String getContent() {
-    // }
+    public String getContent() {
+        return getHtmlElementInnerText(pointer);
+    }
 
     public Widget setContent(String value) {
-        setHtmlElementInnerText(this.pointer, value);
+        setHtmlElementInnerText(pointer, value);
+        return this;
+    }
+
+    public Widget setAppend(Element element) {
+        setHtmlElementAppend(this.pointer, element.getPointer());
         return this;
     }
 }
