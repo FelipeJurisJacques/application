@@ -3,11 +3,6 @@ package org.application.web.widgets;
 import org.application.web.elements.Element;
 
 public class Widget extends Element {
-
-    public static Widget create(char tag) {
-        return new Widget(getDocumentCreateElement(tag));
-    }
-
     public static Widget create(String tag) {
         return new Widget(getDocumentCreateElement(tag));
     }
@@ -15,10 +10,38 @@ public class Widget extends Element {
     public Widget(Object pointer) {
         super(pointer);
     }
-    
+
+    public Widget append(Element element) {
+        setHtmlElementAppend(this.pointer, element.getPointer());
+        return this;
+    }
+
     @Override
     public Widget setAttribute(String name, String value) {
         super.setAttribute(name, value);
+        return this;
+    }
+
+    public Widget setId(String value) {
+        super.setAttribute("class", value);
+        return this;
+    }
+
+    public String setClass() {
+        return super.getAttribute("class");
+    }
+
+    public Widget setClass(String value) {
+        super.setAttribute("class", value);
+        return this;
+    }
+
+    public String setTitle() {
+        return super.getAttribute("title");
+    }
+
+    public Widget setTitle(String value) {
+        super.setAttribute("title", value);
         return this;
     }
 
@@ -31,8 +54,10 @@ public class Widget extends Element {
         return this;
     }
 
-    public Widget setAppend(Element element) {
-        setHtmlElementAppend(this.pointer, element.getPointer());
+    public Widget setChildren(Element[] elements) {
+        for (Element element : elements) {
+            this.append(element);
+        }
         return this;
     }
 }

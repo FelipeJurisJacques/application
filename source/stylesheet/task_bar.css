@@ -1,0 +1,84 @@
+/* footer.bar {
+    width: 100%;
+    height: 30px;
+    bottom: 0px;
+    display: flex;
+    position: absolute;
+    clip-path: polygon(0% 10%,
+            5% 10%,
+            6% 0%,
+            35% 0%,
+            36% 10%,
+            64% 10%,
+            65% 0%,
+            94% 0%,
+            95% 10%,
+            100% 10%,
+            100% 90%,
+            75% 90%,
+            74% 100%,
+            26% 100%,
+            25% 90%,
+            0% 90%);
+    background: #009FD6;
+    align-items: center;
+    background-size: inherit;
+    justify-content: center;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+} */
+
+footer.task_bar {
+    width: 100%;
+    height: 30px;
+    bottom: 0px;
+    display: flex;
+    position: absolute;
+    background-image: url(../../source/image/background/taskbar.png);
+}
+
+footer.task_bar button.start {
+    width: 102px;
+    height: 30px;
+    background-image: url(../../source/image/icon/start_button.png);
+}
+
+footer.task_bar button.start:hover {
+    background-image: url(../../source/image/icon/start_button_hover.png);
+}
+
+footer.task_bar button.start:active {
+    background-image: url(../../source/image/icon/start_button_active.png);
+}
+
+footer.task_bar button.tab {
+    width: 134px;
+    height: 30px;
+    text-align: left;
+    background-image: url(../../source/image/icon/windows_button_tab.png);
+}
+
+footer.task_bar button.tab:hover {
+    background-image: url(../../source/image/icon/windows_button_tab_hover.png);
+}
+
+footer.task_bar button.tab.active {
+    background-image: url(../../source/image/icon/windows_button_tab_active.png);
+}
+
+footer.task_bar button {
+    font: 12px/100% Arial, Helvetica, sans-serif;
+    border: 0;
+    font-size: 11px;
+    border-color: transparent;
+    background-color: transparent;
+}
+
+canvas#skin {
+    position: absolute;
+    left: calc(50% - 100px);
+    top: calc(50% - 100px);
+    width: 200px;
+    height: 200px;
+}

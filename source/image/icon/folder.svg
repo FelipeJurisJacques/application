@@ -1,0 +1,10 @@
+<svg
+    xmlns="http://www.w3.org/2000/svg"
+    xml:space="preserve"
+    width="50px" height="50px"
+    viewBox="0 0 100 100"
+    zoomAndPan="enable"
+>
+    <polygon fill="#5AC0EE" points="45,07 55,07 57,0 97,0 100,07 100,14 50,14 45,07"/>
+    <polygon fill="#5AC0EE" points="0,09 2,07 42,07 48,16 100,16 100,98 98,100 2,100 0,98 0,09"/>
+</svg>

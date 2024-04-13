@@ -1,6 +1,5 @@
 import org.application.web.libs.Console;
-import org.application.web.widgets.Widget;
-import org.application.web.elements.Document;
+import org.application.web.views.Desktop;
 import de.inetsoftware.jwebassembly.api.annotation.Export;
 
 /**
@@ -11,9 +10,7 @@ public class Application {
     @Export
     public static void main() {
         try {
-            Document.getBody().setAppend(Widget.create('p')
-                    .setContent("Hello World, this text come from WebAssembly.")
-                    .setAttribute("class", "test"));
+            Desktop desktop = new Desktop();
         } catch (Exception error) {
             Console.error(error);
         }

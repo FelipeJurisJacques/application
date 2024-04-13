@@ -1,0 +1,139 @@
+div.modal {
+    top: 0px;
+    left: 0px;
+    /* width: 50vw;
+    height: 70vh; */
+    /* display: grid; */
+    display: flex;
+    z-index: 1;
+    position: fixed;
+    column-gap: 100%;
+    flex-direction: column;
+    background-color: black;
+    grid-template-rows: 120px auto 85px;
+}
+
+div.modal div.background *,
+div.modal div.content {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    /* flex: 1; */
+    /* display: flex; */
+    /* flex-grow: 1; */
+    /* flex-direction: column; */
+}
+
+div.modal header {
+    position: relative;
+    min-height: 70px;
+    margin-bottom: 10px;
+}
+
+div.modal header div.background div.part1 {
+    background: #B3B3B3;
+    clip-path: polygon(0px 0px,
+            24px 0px,
+            0px 24px);
+}
+
+div.modal header div.background div.part2 {
+    background: #009FD6;
+    clip-path: polygon(48px 0px,
+            calc(100% - 3px) 0px,
+            100% 3px,
+            100% calc(100% - 3px),
+            calc(100% - 3px) 100%,
+            3px 100%,
+            0px calc(100% - 3px),
+            0px 48px);
+}
+
+div.modal header button.close {
+    position: absolute;
+    right: 0px;
+    border: 0;
+    color: white;
+    background-color: transparent;
+}
+
+div.modal header button.close:hover {
+    background-color: red;
+}
+
+div.modal div.container {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    min-height: 200px;
+}
+
+div.modal div.container div.background div.part1 {
+    background: #009FD6;
+}
+
+@media screen and (min-height: 480px) {
+    div.modal div.container div.background div.part1 {
+        clip-path: polygon(0px 40%,
+                0px 60%,
+                36px calc(60% + 48px),
+                36px 80%,
+                0px calc(80% + 48px),
+                0px calc(100% - 5px),
+                5px 100%,
+                62px 100%,
+                62px calc(100% - 2px),
+                5px calc(100% - 2px),
+                2px calc(100% - 5px),
+                2px calc(80% + 48px),
+                38px 80%,
+                38px calc(60% + 48px),
+                2px 60%,
+                2px 40%);
+    }
+}
+
+@media screen and (max-height: 480px) {
+    div.modal div.container div.background div.part1 {
+        clip-path: polygon(0px 40%,
+                0px 60%,
+                0px calc(100% - 5px),
+                5px 100%,
+                62px 100%,
+                62px calc(100% - 2px),
+                5px calc(100% - 2px),
+                2px calc(100% - 5px),
+                2px 60%,
+                2px 40%);
+    }
+}
+
+div.modal footer {
+    height: 30px;
+    position: relative;
+    clip-path: polygon(2px 0px,
+            calc(100% - 2px) 0px,
+            100% 2px,
+            100% calc(100% - 23px),
+            calc(100% - 23px) 100%,
+            2px 100%,
+            0px calc(100% - 2px),
+            0px 2px);
+    background: #009FD6;
+    margin-top: 10px;
+}
+
+div.modal footer div.background div.part1 {
+    background: #009FD6;
+    clip-path: polygon(3px 0px,
+            calc(100% - 3px) 0px,
+            100% 3px,
+            100% calc(100% - 20px),
+            calc(100% - 20px) 100%,
+            3px 100%,
+            0px calc(100% - 3px),
+            0px 3px);
+}
