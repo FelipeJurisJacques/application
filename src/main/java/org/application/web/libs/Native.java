@@ -8,6 +8,25 @@ import de.inetsoftware.jwebassembly.api.annotation.Import;
  */
 public abstract class Native {
 
+    // EVENTS
+
+    protected static String getEventType(Object pointer) {
+        return _getString(_getEventType(pointer));
+    }
+
+    protected static void addEventListener(Object pointer, String name) {
+        _addEventListener(pointer, _toString(name));
+    }
+
+    @Import(module = "native", name = "getEventType", js = "e => e.type")
+    protected static native Object _getEventType(Object pointer);
+
+    @Import(module = "native", name = "getEventTarget", js = "e => e.target")
+    protected static native Object getEventTarget(Object pointer);
+
+    @Import(module = "native", name = "addEventListener", js = "(o, n) => o.addEventListener(n, e => wasmImports.native.message(e))")
+    protected static native void _addEventListener(Object pointer, Object name);
+
     // CONSOLE LOG
 
     protected static void setConsoleLogChar(char value) {
@@ -91,9 +110,6 @@ public abstract class Native {
 
     @Import(module = "native", name = "setHtmlElementAppend", js = "(o, c) => o.append(c)")
     protected static native void setHtmlElementAppend(Object pointer, Object child);
-
-    @Import(module = "native", name = "getObjectAttribute", js = "(o, p) => o[p.asciiToString()]")
-    private static native Object _getObjectAttribute(Object pointer, int[] value);
 
     @Import(module = "native", name = "getHtmlElementAttribute", js = "(e, n) => e.getAttribute(n)")
     private static native Object _getHtmlElementAttribute(Object pointer, Object name);

@@ -1,8 +1,10 @@
 package org.application.web.widgets;
 
 import org.application.web.elements.Element;
+import org.application.web.events.ActionListener;
 
 public class Widget extends Element {
+
     public static Widget create(String tag) {
         return new Widget(getDocumentCreateElement(tag));
     }
@@ -12,7 +14,7 @@ public class Widget extends Element {
     }
 
     public Widget append(Element element) {
-        setHtmlElementAppend(this.pointer, element.getPointer());
+        setHtmlElementAppend(pointer, element.getPointer());
         return this;
     }
 
@@ -54,10 +56,16 @@ public class Widget extends Element {
         return this;
     }
 
-    public Widget setChildren(Element[] elements) {
-        for (Element element : elements) {
-            this.append(element);
-        }
+    public Widget addActionListener(String name, ActionListener listener) {
+        listener.setType(name);
+        listener.setOrigin(pointer);
         return this;
     }
+
+    // public Widget setChildren(Element[] elements) {
+    // for (Element element : elements) {
+    // this.append(element);
+    // }
+    // return this;
+    // }
 }
