@@ -15,12 +15,6 @@ public class Desktop {
                         .setClass("bar"))
                 .append(Widget.create("div")
                         .setClass("start_menu")
-                        .addActionListener("click", new ActionListener() {
-                            @Override
-                            public void actionPerformed(EventListener event) {
-                                startMenu();
-                            }
-                        })
                         .append(
                                 Widget.create("ul")
                                         .append(Widget.create("li")
@@ -32,7 +26,13 @@ public class Desktop {
                         .setClass("task_bar")
                         .append(Widget.create("button")
                                 .setClass("start")
-                                .setTitle("Start"))));
+                                .setTitle("Start")
+                                .addActionListener("click", new ActionListener() {
+                                    @Override
+                                    public void actionPerformed(EventListener event) {
+                                        startMenu();
+                                    }
+                                }))));
     }
 
     public void startMenu() {

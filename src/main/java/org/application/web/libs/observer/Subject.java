@@ -15,8 +15,8 @@ public class Subject {
     }
 
     public void notify(Object data) {
-        // for (Observer handler : handlers) {
-        //     handler.notify(data);
-        // }
+        for (int i = 0; i < handlers.size(); i++) {
+            handlers.get(i).notify(data);
+        }
     }
 }
