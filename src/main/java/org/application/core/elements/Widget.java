@@ -1,7 +1,6 @@
-package org.application.web.widgets;
+package org.application.core.elements;
 
-import org.application.web.elements.Element;
-import org.application.web.events.ActionListener;
+import org.application.core.event.ActionListener;
 
 public class Widget extends Element {
 

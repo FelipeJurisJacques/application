@@ -1,10 +1,10 @@
 package org.application.web.views;
 
-import org.application.web.elements.Body;
-import org.application.web.widgets.Widget;
-import org.application.web.elements.Document;
-import org.application.web.events.EventListener;
-import org.application.web.events.ActionListener;
+import org.application.core.elements.Body;
+import org.application.core.elements.Widget;
+import org.application.core.elements.Document;
+import org.application.core.event.EventListener;
+import org.application.core.event.ActionListener;
 
 public class Desktop {
     public Desktop() {

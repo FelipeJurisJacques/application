@@ -1,4 +1,4 @@
-package org.application.web.libs;
+package org.application.core;
 
 /**
  *

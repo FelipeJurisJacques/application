@@ -1,6 +1,6 @@
-package org.application.web.elements;
+package org.application.core.elements;
 
-import org.application.web.libs.Node;
+import org.application.core.Node;
 
 /**
  *

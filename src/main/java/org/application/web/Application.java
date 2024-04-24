@@ -1,4 +1,4 @@
-import org.application.web.libs.Console;
+import org.application.core.Console;
 import org.application.web.views.Desktop;
 import de.inetsoftware.jwebassembly.api.annotation.Export;
 

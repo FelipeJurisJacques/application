@@ -1,4 +1,4 @@
-package org.application.web.libs.observer;
+package org.application.core.observer;
 
 import java.util.List;
 import java.util.ArrayList;

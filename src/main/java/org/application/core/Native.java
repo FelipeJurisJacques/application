@@ -1,5 +1,6 @@
-package org.application.web.libs;
+package org.application.core;
 
+import de.inetsoftware.jwebassembly.api.annotation.Export;
 import de.inetsoftware.jwebassembly.api.annotation.Import;
 
 /**
@@ -9,6 +10,11 @@ import de.inetsoftware.jwebassembly.api.annotation.Import;
 public abstract class Native {
 
     // EVENTS
+
+    @Export
+    public static void eventDispatch(Object data) {
+        setConsoleLogObject(data);
+    }
 
     protected static String getEventType(Object pointer) {
         return _getString(_getEventType(pointer));
@@ -24,7 +30,7 @@ public abstract class Native {
     @Import(module = "native", name = "getEventTarget", js = "e => e.target")
     protected static native Object getEventTarget(Object pointer);
 
-    @Import(module = "native", name = "addEventListener", js = "(o, n) => o.addEventListener(n, e => wasmImports.native.message(e))")
+    @Import(module = "native", name = "addEventListener", js = "(o, n) => o.addEventListener(n, e => wasmImports.native.eventDispatch(e))")
     protected static native void _addEventListener(Object pointer, Object name);
 
     // CONSOLE LOG

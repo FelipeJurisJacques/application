@@ -1,7 +1,7 @@
-package org.application.web.events;
+package org.application.core.event;
 
-import org.application.web.libs.Node;
-import org.application.web.libs.observer.Observer;
+import org.application.core.Node;
+import org.application.core.observer.Observer;
 
 public class ActionListener implements Observer {
     protected String type;

@@ -1,6 +1,4 @@
-package org.application.web.elements;
-
-import org.application.web.widgets.Widget;
+package org.application.core.elements;
 
 public class Body extends Widget {
 

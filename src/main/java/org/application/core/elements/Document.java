@@ -1,6 +1,6 @@
-package org.application.web.elements;
+package org.application.core.elements;
 
-import org.application.web.libs.Native;
+import org.application.core.Native;
 
 public class Document extends Native {
 

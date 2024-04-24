@@ -1,7 +1,7 @@
-package org.application.web.events;
+package org.application.core.event;
 
-import org.application.web.libs.Native;
-import org.application.web.widgets.Widget;
+import org.application.core.Native;
+import org.application.core.elements.Widget;
 
 public class EventListener extends Native {
     protected Object pointer;
