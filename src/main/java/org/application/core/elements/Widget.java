@@ -56,8 +56,9 @@ public class Widget extends Element {
     }
 
     public Widget addActionListener(String name, ActionListener listener) {
-        addEventListener(pointer, name);
+        subscribe(listener);
         listener.setType(name);
+        addEventListener(pointer, name);
         listener.setOrigin(this);
         return this;
     }

@@ -8,7 +8,6 @@ WebAssembly.instantiateStreaming(fetch(new URL(
         }
     }
     result.instance.exports.main()
-    console.log(wasmImports.native)
 }).catch(error => {
     console.error(error)
 })

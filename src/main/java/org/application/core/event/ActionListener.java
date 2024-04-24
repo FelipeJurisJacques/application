@@ -1,25 +1,13 @@
 package org.application.core.event;
 
 import org.application.core.Node;
-import org.application.core.observer.Observer;
 
-public class ActionListener implements Observer {
+public class ActionListener {
     protected String type;
     protected Node origin;
 
     public void actionPerformed(EventListener event) {
         throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
-    }
-
-    @Override
-    public void notify(Object data) {
-        EventListener event = new EventListener(data);
-        if (
-            (type == null || event.getType().equals(type))
-        //     && (origin == null || event.getTarget().equals(origin))
-        ) {
-            actionPerformed(event);
-        }
     }
 
     public void setType(String type) {

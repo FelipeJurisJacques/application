@@ -1,5 +1,6 @@
 package org.application.web.views;
 
+import org.application.core.Console;
 import org.application.core.elements.Body;
 import org.application.core.elements.Widget;
 import org.application.core.elements.Document;
@@ -36,5 +37,6 @@ public class Desktop {
     }
 
     public void startMenu() {
+        Console.log("clicou no botao");
     }
 }

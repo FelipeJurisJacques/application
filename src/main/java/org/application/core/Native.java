@@ -1,5 +1,10 @@
 package org.application.core;
 
+import java.util.List;
+import java.util.ArrayList;
+import org.application.core.event.ActionListener;
+import org.application.core.event.EventListener;
+
 import de.inetsoftware.jwebassembly.api.annotation.Export;
 import de.inetsoftware.jwebassembly.api.annotation.Import;
 
@@ -11,9 +16,19 @@ public abstract class Native {
 
     // EVENTS
 
+    private static List<ActionListener> eventHandlers = new ArrayList<>();
+
+    public static void subscribe(ActionListener observer) {
+        eventHandlers.add(observer);
+    }
+
     @Export
     public static void eventDispatch(Object data) {
         setConsoleLogObject(data);
+        EventListener event = new EventListener(data);
+        for (int i = 0; i < eventHandlers.size(); i++) {
+            eventHandlers.get(i).actionPerformed(event);
+        }
     }
 
     protected static String getEventType(Object pointer) {
