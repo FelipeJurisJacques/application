@@ -1,5 +1,6 @@
 package org.application.core.elements;
 
+import org.application.core.event.EventListener;
 import org.application.core.event.ActionListener;
 
 public class Widget extends Element {
@@ -55,11 +56,8 @@ public class Widget extends Element {
         return this;
     }
 
-    public Widget addActionListener(String name, ActionListener listener) {
-        subscribe(listener);
-        listener.setType(name);
-        addEventListener(pointer, name);
-        listener.setOrigin(this);
+    public Widget addActionListener(ActionListener listener) {
+        EventListener.addEventListener(pointer, "click", listener);
         return this;
     }
 

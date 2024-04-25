@@ -1,10 +1,7 @@
 package org.application.core;
 
-import java.util.List;
-import java.util.ArrayList;
-import org.application.core.event.ActionListener;
 import org.application.core.event.EventListener;
-
+import org.application.core.asynchronous.Asynchronous;
 import de.inetsoftware.jwebassembly.api.annotation.Export;
 import de.inetsoftware.jwebassembly.api.annotation.Import;
 
@@ -16,19 +13,14 @@ public abstract class Native {
 
     // EVENTS
 
-    private static List<ActionListener> eventHandlers = new ArrayList<>();
-
-    public static void subscribe(ActionListener observer) {
-        eventHandlers.add(observer);
+    @Export
+    public static void message(Object data, Object origin) {
+        Asynchronous.message(data, origin);
     }
 
     @Export
     public static void eventDispatch(Object data) {
-        setConsoleLogObject(data);
-        EventListener event = new EventListener(data);
-        for (int i = 0; i < eventHandlers.size(); i++) {
-            eventHandlers.get(i).actionPerformed(event);
-        }
+        EventListener.eventDispatch(data);
     }
 
     protected static String getEventType(Object pointer) {
@@ -157,6 +149,9 @@ public abstract class Native {
     private static native Object _getDocumentCreateElement(Object pointer, Object name);
 
     // TRADUCAO
+
+    @Import(module = "native", name = "equals", js = "(o, p) => o === p")
+    protected static native boolean equals(Object pointer1, Object pointer2);
 
     private static Object _toString(String value) {
         int[] result = new int[value.length()];

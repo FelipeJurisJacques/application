@@ -1,10 +1,10 @@
 package org.application.web.views;
 
 import org.application.core.Console;
+import org.application.core.event.Event;
 import org.application.core.elements.Body;
 import org.application.core.elements.Widget;
 import org.application.core.elements.Document;
-import org.application.core.event.EventListener;
 import org.application.core.event.ActionListener;
 
 public class Desktop {
@@ -28,9 +28,9 @@ public class Desktop {
                         .append(Widget.create("button")
                                 .setClass("start")
                                 .setTitle("Start")
-                                .addActionListener("click", new ActionListener() {
+                                .addActionListener(new ActionListener() {
                                     @Override
-                                    public void actionPerformed(EventListener event) {
+                                    public void actionPerformed(Event event) {
                                         startMenu();
                                     }
                                 }))));

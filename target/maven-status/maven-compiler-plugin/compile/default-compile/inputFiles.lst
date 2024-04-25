@@ -1,3 +1,4 @@
+C:\Users\felip\workspace\application\src\main\java\org\application\core\asynchronous\Asynchronous.java
 C:\Users\felip\workspace\application\src\main\java\org\application\web\Application.java
 C:\Users\felip\workspace\application\src\main\java\org\application\core\elements\Body.java
 C:\Users\felip\workspace\application\src\main\java\org\application\web\views\Desktop.java
@@ -6,6 +7,8 @@ C:\Users\felip\workspace\application\src\main\java\org\application\core\elements
 C:\Users\felip\workspace\application\src\main\java\org\application\core\elements\Document.java
 C:\Users\felip\workspace\application\src\main\java\org\application\core\elements\Widget.java
 C:\Users\felip\workspace\application\src\main\java\org\application\core\event\ActionListener.java
+C:\Users\felip\workspace\application\src\main\java\org\application\core\asynchronous\MessageObserver.java
+C:\Users\felip\workspace\application\src\main\java\org\application\core\event\Event.java
 C:\Users\felip\workspace\application\src\main\java\org\application\core\Native.java
 C:\Users\felip\workspace\application\src\main\java\org\application\core\observer\Observer.java
 C:\Users\felip\workspace\application\src\main\java\org\application\core\Node.java
