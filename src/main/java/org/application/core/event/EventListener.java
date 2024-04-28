@@ -2,8 +2,6 @@ package org.application.core.event;
 
 import java.util.List;
 import java.util.ArrayList;
-
-import org.application.core.Console;
 import org.application.core.Native;
 
 /**
@@ -12,70 +10,53 @@ import org.application.core.Native;
  * toma acao a partir de qualquer evento recebido pelo js
  */
 public class EventListener extends Native {
-    private static List<EventListener> handlers = new ArrayList<>();
-
-    private Object pointer;
-    private List<String> names;
-    private List<ActionListener> listeners;
+    private static List<Handler> handlers = new ArrayList<>();
+    private static List<Listener> listeners = new ArrayList<>();
 
     public static void eventDispatch(Object data) {
-        EventListener handler = getEventListener(getEventTarget(data));
-        if (handler != null) {
+        if (handlers.size() > 0) {
             Event event = new Event(data);
-            for (int i = 0; i < handler.listeners.size(); i++) {
-                handler.listeners.get(i).actionPerformed(event);
+            Object target = getEventTarget(data);
+            Handler handler = null;
+            for (int i = 0; i < handlers.size(); i++) {
+                handler = handlers.get(i);
+                if (equals(target, handler.getPointer())) {
+                    handler.eventDispatch(event);
+                }
             }
         }
     }
 
-    public static void addEventListener(Object pointer, String name, ActionListener observer) {
-        EventListener handler = getEventListener(pointer);
-        if (handler == null) {
-            handler = new EventListener(pointer);
-            handler.addEventType(name);
-        } else if (!handler.isContainsEventType(name)) {
-            handler.addEventType(name);
-        }
-        handler.addActionListener(observer);
-    }
-
-    protected static EventListener getEventListener(Object pointer) {
-        EventListener handler = null;
+    public static void addEventListener(Object pointer, EventType type, ActionListener observer) {
+        Handler handler = null;
+        Listener listener = null;
         for (int i = 0; i < handlers.size(); i++) {
             handler = handlers.get(i);
-            if (
-                pointer == null
-                || handler.pointer == null
-                || equals(pointer, handler.pointer)
-            ) {
-                return handler;
+            if (!equals(pointer, handler.getPointer())) {
+                handler = null;
+                continue;
             }
+            handler.addActionListener(observer);
+            break;
         }
-        return null;
-    }
-
-    protected EventListener(Object pointer) {
-        this.names = new ArrayList<>();
-        this.pointer = pointer;
-        this.listeners = new ArrayList<>();
-        handlers.add(this);
-    }
-
-    protected boolean isContainsEventType(String name) {
-        for (int i = 0; i < names.size(); i++) {
-            if (names.get(i).equals(name)) {
-                return true;
+        for (int i = 0; i < listeners.size(); i++) {
+            listener = listeners.get(i);
+            if (!equals(pointer, listener.getPointer())) {
+                listener = null;
+                continue;
             }
+            listener.addEventType(type);
+            break;
         }
-        return false;
-    }
-
-    protected void addEventType(String name) {
-        names.add(name);
-        addEventListener(pointer, name);
-    }
-
-    protected void addActionListener(ActionListener observer) {
-        listeners.add(observer);
+        if (handler == null) {
+            handler = new Handler(pointer);
+            handler.addActionListener(observer);
+            handlers.add(handler);
+        }
+        if (listener == null) {
+            listener = new Listener(pointer);
+            listener.addEventType(type);
+            listeners.add(listener);
+        }
     }
 }

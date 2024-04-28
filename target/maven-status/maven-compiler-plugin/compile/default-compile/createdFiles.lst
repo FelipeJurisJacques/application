@@ -10,9 +10,12 @@ org\application\core\elements\Document.class
 org\application\core\event\Event.class
 org\application\core\event\EventListener.class
 org\application\core\Native.class
+org\application\core\event\Listener.class
 org\application\core\observer\Subject.class
-org\application\core\Node.class
+org\application\core\event\EventType.class
+org\application\core\event\Handler.class
 org\application\core\elements\Element.class
+org\application\core\event\Listener$1.class
 org\application\web\views\Desktop.class
 Application.class
 org\application\core\elements\Body.class

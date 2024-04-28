@@ -1,23 +1,28 @@
 package org.application.core.elements;
 
-import org.application.core.Node;
+import org.application.core.Native;
 
 /**
  *
  * @author felipe
  */
-public class Element extends Node {
+public class Element extends Native {
+    protected Object pointer;
 
     public Element(Object pointer) {
-        super(pointer);
+        this.pointer = pointer;
+    }
+
+    public Object getPointer() {
+        return pointer;
     }
 
     public String getAttribute(String name) {
-        return getHtmlElementAttribute(this.pointer, name);
+        return getHtmlElementAttribute(pointer, name);
     }
 
     public Element setAttribute(String name, String value) {
-        setHtmlElementAttribute(this.pointer, name, value);
+        setHtmlElementAttribute(pointer, name, value);
         return this;
     }
 }

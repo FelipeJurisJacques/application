@@ -10,7 +10,16 @@ public class Event extends Native {
         this.pointer = pointer;
     }
 
-    public String getType() {
+    public EventType getType() {
+        switch (getEventType(pointer)) {
+            case "click":
+                return EventType.CLICK;
+            default:
+                return EventType.NONE;
+        }
+    }
+
+    public String getTypeName() {
         return getEventType(pointer);
     }
 
