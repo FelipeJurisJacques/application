@@ -1,10 +1,20 @@
 package org.application.core.elements;
 
-import org.application.core.Native;
+public class Document extends Element {
 
-public class Document extends Native {
+    public Document() {
+        super(getDocument());
+    }
 
-    public static Body getBody() {
-        return new Body(getHtmlBodyElement(getDocument()));
+    public Document(Object pointer) {
+        super(pointer);
+    }
+
+    public Head getHead() {
+        return new Head(getHtmlHeadElement(pointer));
+    }
+
+    public Body getBody() {
+        return new Body(getHtmlBodyElement(pointer));
     }
 }

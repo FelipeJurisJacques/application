@@ -30,11 +30,11 @@ public class Widget extends Element {
         return this;
     }
 
-    public String setClass() {
+    public String getClassName() {
         return super.getAttribute("class");
     }
 
-    public Widget setClass(String value) {
+    public Widget setClassName(String value) {
         super.setAttribute("class", value);
         return this;
     }
