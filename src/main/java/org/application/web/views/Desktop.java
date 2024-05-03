@@ -9,7 +9,7 @@ import org.application.core.event.ActionListener;
 
 public class Desktop {
         public Desktop() {
-                Document document = new Document();
+                Document document = Document.getInstance();
                 Head head = document.getHead();
                 head.addStylesheet("./source/stylesheet/index.css");
                 head.addStylesheet("./source/stylesheet/window.css");

@@ -2,6 +2,7 @@ C:\Users\felip\workspace\application\src\main\java\org\application\core\asynchro
 C:\Users\felip\workspace\application\src\main\java\org\application\web\Application.java
 C:\Users\felip\workspace\application\src\main\java\org\application\core\elements\Body.java
 C:\Users\felip\workspace\application\src\main\java\org\application\web\views\Desktop.java
+C:\Users\felip\workspace\application\src\main\java\org\application\core\draw\Vector2.java
 C:\Users\felip\workspace\application\src\main\java\org\application\core\event\EventType.java
 C:\Users\felip\workspace\application\src\main\java\org\application\core\observer\Subject.java
 C:\Users\felip\workspace\application\src\main\java\org\application\core\elements\Head.java
@@ -14,6 +15,7 @@ C:\Users\felip\workspace\application\src\main\java\org\application\core\event\Ev
 C:\Users\felip\workspace\application\src\main\java\org\application\core\Native.java
 C:\Users\felip\workspace\application\src\main\java\org\application\core\observer\Observer.java
 C:\Users\felip\workspace\application\src\main\java\org\application\core\Console.java
+C:\Users\felip\workspace\application\src\main\java\org\application\core\draw\ClipPatch.java
 C:\Users\felip\workspace\application\src\main\java\org\application\core\event\Listener.java
 C:\Users\felip\workspace\application\src\main\java\org\application\core\event\EventListener.java
 C:\Users\felip\workspace\application\src\main\java\org\application\core\event\Handler.java

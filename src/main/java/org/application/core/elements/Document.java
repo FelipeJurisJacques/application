@@ -2,8 +2,10 @@ package org.application.core.elements;
 
 public class Document extends Element {
 
-    public Document() {
-        super(getDocument());
+    public static Document getInstance() {
+        Object pointer = getDocument();
+        Document element = (Document) Element.getElement(pointer);
+        return element == null ? new Document(pointer) : element;
     }
 
     public Document(Object pointer) {
@@ -11,10 +13,14 @@ public class Document extends Element {
     }
 
     public Head getHead() {
-        return new Head(getHtmlHeadElement(pointer));
+        Object head = getHtmlHeadElement(pointer);
+        Head element = (Head) Element.getElement(head);
+        return element == null ? new Head(head) : element;
     }
 
     public Body getBody() {
-        return new Body(getHtmlBodyElement(pointer));
+        Object body = getHtmlBodyElement(pointer);
+        Body element = (Body) Element.getElement(body);
+        return element == null ? new Body(body) : element;
     }
 }

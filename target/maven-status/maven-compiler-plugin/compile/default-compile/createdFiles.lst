@@ -6,12 +6,14 @@ org\application\web\views\Desktop$1.class
 org\application\core\observer\Observer.class
 org\application\core\asynchronous\Asynchronous.class
 org\application\core\asynchronous\MessageObserver.class
+org\application\core\draw\Vector2.class
 org\application\core\elements\Document.class
 org\application\core\event\Event.class
 org\application\core\event\EventListener.class
 org\application\core\Native.class
 org\application\core\event\Listener.class
 org\application\core\observer\Subject.class
+org\application\core\draw\ClipPatch.class
 org\application\core\event\EventType.class
 org\application\core\event\Handler.class
 org\application\core\elements\Element.class

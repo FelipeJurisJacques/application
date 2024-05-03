@@ -124,6 +124,9 @@ public abstract class Native {
     @Import(module = "native", name = "getHtmlHeadElement", js = "o => o.head")
     protected static native Object getHtmlHeadElement(Object pointer);
 
+    @Import(module = "native", name = "setHtmlElementRemove", js = "o => o.remove()")
+    protected static native void setHtmlElementRemove(Object pointer);
+
     @Import(module = "native", name = "setHtmlElementAppend", js = "(o, c) => o.append(c)")
     protected static native void setHtmlElementAppend(Object pointer, Object child);
 

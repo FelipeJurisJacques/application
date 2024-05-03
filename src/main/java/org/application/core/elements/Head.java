@@ -5,9 +5,9 @@ public class Head extends Widget {
         super(pointer);
     }
 
-    public Head setTitle(String value) {
-        return this;
-    }
+    // public Head setTitle(String value) {
+    //     return this;
+    // }
 
     public Head addStylesheet(String path) {
         Element element = new Element(getDocumentCreateElement("link"));
