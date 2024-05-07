@@ -28,4 +28,15 @@ class Handler {
             listeners.get(i).actionPerformed(event);
         }
     }
+
+    @Override
+    public void finalize() {
+        if (listeners != null) {
+            for (int i = 0; i < listeners.size(); i++) {
+                listeners.get(i).finalize();
+            }
+        }
+        pointer = null;
+        listeners = null;
+    }
 }

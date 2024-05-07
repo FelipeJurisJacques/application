@@ -5,22 +5,22 @@ import org.application.core.elements.Widget;
 
 public class Event extends Native {
     protected Object pointer;
+    protected EventType type;
 
     public Event(Object pointer) {
         this.pointer = pointer;
-    }
-
-    public EventType getType() {
         switch (getEventType(pointer)) {
             case "click":
-                return EventType.CLICK;
+                type = EventType.CLICK;
+                break;
             default:
-                return EventType.NONE;
+                type = EventType.NONE;
+                break;
         }
     }
 
-    public String getTypeName() {
-        return getEventType(pointer);
+    public EventType getType() {
+        return type;
     }
 
     public Widget getTarget() {

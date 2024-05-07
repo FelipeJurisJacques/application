@@ -9,4 +9,8 @@ public class ActionListener {
     public void actionPerformed(Event event) {
         throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
     }
+
+    @Override
+    public void finalize() {
+    }
 }

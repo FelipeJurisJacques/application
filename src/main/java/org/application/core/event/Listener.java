@@ -8,6 +8,7 @@ import org.application.core.Native;
  * OUVINTE DO EVENTO
  */
 class Listener extends Native {
+    private static Object event = getDefaultEventHandling();
     private Object pointer;
     private List<EventType> types;
 
@@ -31,11 +32,17 @@ class Listener extends Native {
             types.add(type);
             switch (type) {
                 case CLICK:
-                    addEventListener(getWindow(), "click");
+                    addEventListener(getWindow(), "click", event);
                     break;
                 default:
                     break;
             }
         }
+    }
+
+    @Override
+    public void finalize() {
+        types = null;
+        pointer = null;
     }
 }

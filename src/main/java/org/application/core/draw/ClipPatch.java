@@ -13,4 +13,9 @@ public class ClipPatch {
     public void move(float x, float y, boolean relative) {
         path.add(new Vector2(x, y, relative));
     }
+
+    @Override
+    public void finalize() {
+        path = null;
+    }
 }

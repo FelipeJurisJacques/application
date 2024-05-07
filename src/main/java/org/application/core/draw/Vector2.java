@@ -1,10 +1,10 @@
 package org.application.core.draw;
 
-public class Vector2 {    
+public class Vector2 {
     float x;
     float y;
     boolean relative;
-    
+
     public Vector2(float x, float y) {
         this.x = x;
         this.y = y;

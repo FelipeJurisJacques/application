@@ -27,18 +27,28 @@ public abstract class Native {
         return _getString(_getEventType(pointer));
     }
 
-    protected static void addEventListener(Object pointer, String name) {
-        _addEventListener(pointer, _toString(name));
+    protected static void addEventListener(Object pointer, String name, Object event) {
+        _addEventListener(pointer, _toString(name), event);
     }
 
-    @Import(module = "native", name = "getEventType", js = "e => e.type")
-    protected static native Object _getEventType(Object pointer);
+    protected static void removeEventListener(Object pointer, String name, Object event) {
+        _removeEventListener(pointer, _toString(name), event);
+    }
 
+    @Import(module = "native", name = "getDefaultEventHandling", js = "() => e => wasmImports.native.eventDispatch(e)")
+    protected static native Object getDefaultEventHandling();
+    
     @Import(module = "native", name = "getEventTarget", js = "e => e.target")
     protected static native Object getEventTarget(Object pointer);
 
-    @Import(module = "native", name = "addEventListener", js = "(o, n) => o.addEventListener(n, e => wasmImports.native.eventDispatch(e))")
-    protected static native void _addEventListener(Object pointer, Object name);
+    @Import(module = "native", name = "getEventType", js = "e => e.type")
+    private static native Object _getEventType(Object pointer);
+    
+    @Import(module = "native", name = "addEventListener", js = "(e, n, l) => e.addEventListener(n, l)")
+    private static native void _addEventListener(Object pointer, Object name, Object event);
+    
+    @Import(module = "native", name = "removeEventListener", js = "(e, n, l) => e.removeEventListener(n, l)")
+    private static native void _removeEventListener(Object pointer, Object name, Object event);
 
     // CONSOLE LOG
 
@@ -129,6 +139,12 @@ public abstract class Native {
 
     @Import(module = "native", name = "setHtmlElementAppend", js = "(o, c) => o.append(c)")
     protected static native void setHtmlElementAppend(Object pointer, Object child);
+
+    @Import(module = "native", name = "getHtmlElementChildrenItem", js = "(e, i) => e.children.item(i)")
+    protected static native Object getHtmlElementChildrenItem(Object pointer, int index);
+
+    @Import(module = "native", name = "getHtmlElementChildrenLength", js = "e => e.children.length")
+    protected static native int getHtmlElementChildrenLength(Object pointer);
 
     @Import(module = "native", name = "getHtmlElementAttribute", js = "(e, n) => e.getAttribute(n)")
     private static native Object _getHtmlElementAttribute(Object pointer, Object name);

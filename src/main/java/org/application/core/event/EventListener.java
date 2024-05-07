@@ -27,7 +27,7 @@ public class EventListener extends Native {
         }
     }
 
-    public static void addEventListener(Object pointer, EventType type, ActionListener observer) {
+    protected static void addEventListener(Object pointer, EventType type, ActionListener observer) {
         Handler handler = null;
         Listener listener = null;
         for (int i = 0; i < handlers.size(); i++) {
@@ -58,5 +58,38 @@ public class EventListener extends Native {
             listener.addEventType(type);
             listeners.add(listener);
         }
+        handler = null;
+        listener = null;
+    }
+
+    protected static void removeEventListener(Object pointer) {
+        if (handlers.size() > 0) {
+            Handler handler = null;
+            for (int i = 0; i < handlers.size(); i++) {
+                handler = handlers.get(i);
+                if (equals(pointer, handler.getPointer())) {
+                    handler.finalize();
+                    handlers.remove(i);
+                    break;
+                }
+            }
+            handler = null;
+        }
+        if (listeners.size() > 0) {
+            Listener listener = null;
+            for (int i = 0; i < listeners.size(); i++) {
+                listener = listeners.get(i);
+                if (equals(pointer, listener.getPointer())) {
+                    listener.finalize();
+                    listeners.remove(i);
+                    break;
+                }
+            }
+            listener = null;
+        }
+    }
+
+    @Override
+    public void finalize() {
     }
 }
