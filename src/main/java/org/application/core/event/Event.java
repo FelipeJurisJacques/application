@@ -8,14 +8,12 @@ public class Event extends Native {
     protected EventType type;
 
     public Event(Object pointer) {
+        String type = getEventType(pointer);
         this.pointer = pointer;
-        switch (getEventType(pointer)) {
-            case "click":
-                type = EventType.CLICK;
-                break;
-            default:
-                type = EventType.NONE;
-                break;
+        if (type.equals("click")) {
+            this.type = EventType.CLICK;
+        } else {
+            this.type = EventType.NONE;
         }
     }
 

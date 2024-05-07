@@ -3,7 +3,6 @@ native:{
 getDocument:() => document,
 getHtmlBodyElement:o => o.body,
 setHtmlElementAppend:(o, c) => o.append(c),
-addEventListener2:(e, n, l) => e.addEventListener(n, l),
 setHtmlElementAttribute:(e, n, v) => e.setAttribute(n, v),
 setConsoleErrorString:v => console.error(v),
 getHtmlHeadElement:o => o.head,
@@ -12,11 +11,12 @@ getDocumentCreateElement2:n => document.createElement(n),
 getChar:(s, i) => s.charCodeAt(i),
 setString:v => { const l = []; for (let a of v[2]) { l.push(String.fromCharCode(a)); } return l.join(''); },
 getEventType:e => e.type,
-setConsoleLogString:v => console.log(v),
 setHtmlElementInnerText:(o, v) => o.innerText = v,
 getEventTarget:e => e.target,
 equals:(o, p) => o === p,
-getDefaultEventHandling:() => e => wasmImports.native.eventDispatch(e)
+getDefaultEventHandling:() => e => wasmImports.native.eventDispatch(e),
+addEventListener:(e, n, l) => e.addEventListener(n, l),
+setConsoleLogBoolean:v => console.log(v == 1)
 },
 NonGC:{
 array_new_u16:(l)=>Object.seal({0:1244,1:0,2:Object.seal(new Array(l).fill(null))}),

@@ -24,10 +24,6 @@ public class Element extends EventListener {
         return null;
     }
 
-    public static Element create(String tag) {
-        return new Element(getDocumentCreateElement(tag));
-    }
-
     public Element(Object pointer) {
         this.pointer = pointer;
         elements.add(this);

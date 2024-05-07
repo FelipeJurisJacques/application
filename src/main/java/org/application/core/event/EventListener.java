@@ -28,8 +28,8 @@ public class EventListener extends Native {
     }
 
     protected static void addEventListener(Object pointer, EventType type, ActionListener observer) {
+        String name = null;
         Handler handler = null;
-        Listener listener = null;
         for (int i = 0; i < handlers.size(); i++) {
             handler = handlers.get(i);
             if (!equals(pointer, handler.getPointer())) {
@@ -39,27 +39,41 @@ public class EventListener extends Native {
             handler.addActionListener(observer);
             break;
         }
-        for (int i = 0; i < listeners.size(); i++) {
-            listener = listeners.get(i);
-            if (!equals(pointer, listener.getPointer())) {
-                listener = null;
-                continue;
-            }
-            listener.addEventType(type);
-            break;
-        }
         if (handler == null) {
             handler = new Handler(pointer);
             handler.addActionListener(observer);
             handlers.add(handler);
         }
-        if (listener == null) {
-            listener = new Listener(pointer);
-            listener.addEventType(type);
-            listeners.add(listener);
-        }
         handler = null;
-        listener = null;
+        switch (type) {
+            case CLICK:
+            case CLICK_AWAY:
+                name = "click";
+                pointer = getWindow();
+                break;
+            case NONE:
+            default:
+                pointer = null;
+                break;
+        }
+        if (name != null && pointer != null) {
+            Listener listener = null;
+            for (int i = 0; i < listeners.size(); i++) {
+                listener = listeners.get(i);
+                if (!equals(pointer, listener.getPointer())) {
+                    listener = null;
+                    continue;
+                }
+                listener.addEventType(name);
+                break;
+            }
+            if (listener == null) {
+                listener = new Listener(pointer);
+                listener.addEventType(name);
+                listeners.add(listener);
+            }
+            listener = null;
+        }
     }
 
     protected static void removeEventListener(Object pointer) {

@@ -13,6 +13,10 @@ public class Widget extends Element {
         super(pointer);
     }
 
+    protected Widget(String tag) {
+        super(getDocumentCreateElement(tag));
+    }
+
     public Widget append(Element element) {
         setHtmlElementAppend(pointer, element.getPointer());
         return this;

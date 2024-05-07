@@ -1,10 +1,9 @@
 package org.application.web.views;
 
 import org.application.core.event.Event;
-import org.application.core.event.EventType;
-import org.application.core.Console;
 import org.application.core.elements.Body;
 import org.application.core.elements.Head;
+import org.application.core.event.EventType;
 import org.application.core.elements.Widget;
 import org.application.core.elements.Document;
 import org.application.core.event.ActionListener;
@@ -38,7 +37,6 @@ public class Desktop {
                 start.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(Event event) {
-                                Console.log("aqui");
                                 if (event.getType() == EventType.CLICK) {
                                         Widget explorer = Widget.create("button");
                                         explorer.setClassName("explorer");
