@@ -1,26 +1,24 @@
 package org.application.core.elements;
 
-public class Document extends Element {
+import org.application.core.Native;
+
+public class Document extends Native {
+    protected static Document document = new Document(getDocument());
+    protected Object pointer;
 
     public static Document getInstance() {
-        Object pointer = getDocument();
-        Document element = (Document) Element.getElement(pointer);
-        return element == null ? new Document(pointer) : element;
+        return document;
     }
 
     public Document(Object pointer) {
-        super(pointer);
+        this.pointer = pointer;
     }
 
-    public Head getHead() {
-        Object head = getHtmlHeadElement(pointer);
-        Head element = (Head) Element.getElement(head);
-        return element == null ? new Head(head) : element;
+    public Element getHead() {
+        return Element.getElement(getHtmlHeadElement(pointer));
     }
 
-    public Body getBody() {
-        Object body = getHtmlBodyElement(pointer);
-        Body element = (Body) Element.getElement(body);
-        return element == null ? new Body(body) : element;
+    public Element getBody() {
+        return Element.getElement(getHtmlBodyElement(pointer));
     }
 }

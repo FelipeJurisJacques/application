@@ -93,6 +93,10 @@ public abstract class Native {
 
     // ELEMENTS
 
+    protected static String getHtmlElementTagName(Object pointer) {
+        return _getString(_getHtmlElementTagName(pointer));
+    }
+
     protected static String getHtmlElementInnerText(Object pointer) {
         return _getString(_getHtmlElementInnerText(pointer));
     }
@@ -146,11 +150,14 @@ public abstract class Native {
     @Import(module = "native", name = "getHtmlElementChildrenLength", js = "e => e.children.length")
     protected static native int getHtmlElementChildrenLength(Object pointer);
 
-    @Import(module = "native", name = "getHtmlElementAttribute", js = "(e, n) => e.getAttribute(n)")
-    private static native Object _getHtmlElementAttribute(Object pointer, Object name);
+    @Import(module = "native", name = "getHtmlElementTagName", js = "e => o.tagName")
+    private static native Object _getHtmlElementTagName(Object pointer);
 
     @Import(module = "native", name = "setHtmlElementAttribute", js = "(e, n, v) => e.setAttribute(n, v)")
     private static native void _setHtmlElementAttribute(Object pointer, Object name, Object value);
+
+    @Import(module = "native", name = "getHtmlElementAttribute", js = "(e, n) => e.getAttribute(n)")
+    private static native Object _getHtmlElementAttribute(Object pointer, Object name);
 
     @Import(module = "native", name = "getHtmlElementInnerText", js = "e => e.innerText")
     private static native Object _getHtmlElementInnerText(Object pointer);

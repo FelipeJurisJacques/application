@@ -56,6 +56,8 @@ public class EventListener extends Native {
                 pointer = null;
                 break;
         }
+        setConsoleLogString(name);
+        setConsoleLogObject(pointer);
         if (name != null && pointer != null) {
             Listener listener = null;
             for (int i = 0; i < listeners.size(); i++) {

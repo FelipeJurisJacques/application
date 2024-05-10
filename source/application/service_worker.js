@@ -1,3 +1,3 @@
-version: 44 
-self.addEventListener('install', event => {                         
-})                         
+version: 47 
+self.addEventListener('install', event => {                            
+})                            

@@ -1,11 +1,15 @@
 package org.application.web.views;
 
 import org.application.core.event.Event;
+import org.application.core.Console;
 import org.application.core.elements.Body;
 import org.application.core.elements.Head;
 import org.application.core.event.EventType;
+import org.application.web.widgets.Curriculum;
 import org.application.core.elements.Widget;
 import org.application.core.elements.Document;
+import org.application.core.elements.Element;
+import org.application.core.elements.ElementType;
 import org.application.core.event.ActionListener;
 
 public class Desktop {
@@ -37,14 +41,29 @@ public class Desktop {
                 start.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(Event event) {
+                                Console.log('a');
                                 if (event.getType() == EventType.CLICK) {
-                                        Widget explorer = Widget.create("button");
+                                        Element explorer = new Element(ElementType.HTML_BUTTON);
                                         explorer.setClassName("explorer");
                                         explorer.setContent("Explorador de arquivos");
+                                        Widget curriculum = Widget.create("button");
+                                        curriculum.setClassName("curriculum");
+                                        curriculum.setContent("Currículo");
+                                        curriculum.addActionListener(new ActionListener() {
+                                                @Override
+                                                public void actionPerformed(Event event) {
+                                                        if (event.getType() == EventType.CLICK) {
+                                                                body.append(new Curriculum());
+                                                        }
+                                                }
+                                        });
                                         Widget ul = Widget.create("ul");
                                         Widget menu = Widget.create("div");
                                         menu.setClassName("start_menu");
-                                        desktop.append(menu.append(ul.append(Widget.create("li").append(explorer))));
+                                        ul.append(Widget.create("li").append(explorer));
+                                        ul.append(Widget.create("li").append(curriculum));
+                                        menu.append(ul);
+                                        desktop.append(menu);
                                 }
                         }
                 });
