@@ -30,7 +30,7 @@ public class Console extends Native {
         setConsoleErrorString(value);
     }
 
-    public static void error(Exception value) {
+    public static void error(Throwable value) {
         setConsoleErrorString(value.getMessage());
     }
 }

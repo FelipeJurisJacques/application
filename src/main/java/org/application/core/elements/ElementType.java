@@ -8,6 +8,7 @@ public enum ElementType {
     HTML_LINK,
     HTML_INPUT,
     HTML_BUTTON,
+    HTML_FOOTER,
     HTML_DOCUMENT,
     HTML_FORMULARY,
     HTML_LIST_ITEM,

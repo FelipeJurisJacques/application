@@ -11,7 +11,7 @@ public class Application {
     public static void main() {
         try {
             Desktop desktop = new Desktop();
-        } catch (Exception error) {
+        } catch (Throwable error) {
             Console.error(error);
         }
     }

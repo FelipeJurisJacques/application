@@ -1,7 +1,6 @@
 package org.application.core.event;
 
 import org.application.core.Native;
-import org.application.core.elements.Widget;
 
 public class Event extends Native {
     protected Object pointer;
@@ -21,7 +20,7 @@ public class Event extends Native {
         return type;
     }
 
-    public Widget getTarget() {
-        return new Widget(getEventTarget(pointer));
-    }
+    // public Widget getTarget() {
+    //     return new Widget(getEventTarget(pointer));
+    // }
 }

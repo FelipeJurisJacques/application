@@ -44,6 +44,8 @@ public class Element extends EventListener {
             this.type = ElementType.HTML_INPUT;
         } else if (tag.equals("BUTTON")) {
             this.type = ElementType.HTML_BUTTON;
+        } else if (tag.equals("FOOTER")) {
+            this.type = ElementType.HTML_FOOTER;
         } else if (tag.equals("HTML")) {
             this.type = ElementType.HTML_DOCUMENT;
         } else if (tag.equals("FORM")) {
@@ -78,13 +80,16 @@ public class Element extends EventListener {
                 pointer = getDocumentCreateElement("bold");
                 break;
             case HTML_LINK:
-            pointer = getDocumentCreateElement("link");
-            break;
+                pointer = getDocumentCreateElement("link");
+                break;
             case HTML_INPUT:
                 pointer = getDocumentCreateElement("input");
                 break;
             case HTML_BUTTON:
                 pointer = getDocumentCreateElement("button");
+                break;
+            case HTML_FOOTER:
+                pointer = getDocumentCreateElement("footer");
                 break;
             case HTML_DOCUMENT:
                 pointer = getDocumentCreateElement("html");

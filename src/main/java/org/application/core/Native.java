@@ -150,7 +150,7 @@ public abstract class Native {
     @Import(module = "native", name = "getHtmlElementChildrenLength", js = "e => e.children.length")
     protected static native int getHtmlElementChildrenLength(Object pointer);
 
-    @Import(module = "native", name = "getHtmlElementTagName", js = "e => o.tagName")
+    @Import(module = "native", name = "getHtmlElementTagName", js = "e => e.tagName")
     private static native Object _getHtmlElementTagName(Object pointer);
 
     @Import(module = "native", name = "setHtmlElementAttribute", js = "(e, n, v) => e.setAttribute(n, v)")
