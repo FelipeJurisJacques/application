@@ -3,116 +3,86 @@ package org.application.core.elements;
 import java.util.List;
 import java.util.ArrayList;
 import org.application.core.event.EventListener;
-import org.application.core.exceptions.ElementOperationUnsupported;
 
 /**
  * @author felipe
  */
 public class Element extends EventListener {
-    private static List<Element> elements = new ArrayList<>();
+    protected static List<Element> elements = new ArrayList<>();
     protected Object pointer;
     protected ElementType type;
+    protected Document document;
 
     public static Element getElement(Object pointer) {
-        Element element;
-        for (int i = 0; i < elements.size(); i++) {
-            element = elements.get(i);
-            if (equals(pointer, element.pointer)) {
-                return element;
+        if (elements.size() > 0) {
+            Element element;
+            for (int i = 0; i < elements.size(); i++) {
+                element = elements.get(i);
+                if (equals(pointer, element.pointer)) {
+                    return element;
+                }
             }
         }
-        element = new Element(pointer);
-        return element;
+        return null;
     }
 
-    protected Element(Object pointer) {
+    protected Element(Document document, Object pointer, ElementType type) {
         if (pointer == null) {
             throw new IllegalArgumentException("Element not nullable");
         }
+        boolean supported = false;
         String tag = getHtmlElementTagName(pointer);
-        if (tag.equals("DIV")) {
-            this.type = ElementType.HTML_DIV;
-        } else if (tag.equals("HEAD")) {
-            this.type = ElementType.HTML_HEAD;
-        } else if (tag.equals("BODY")) {
-            this.type = ElementType.HTML_BODY;
-        } else if (tag.equals("BOLD")) {
-            this.type = ElementType.HTML_BOLD;
-        } else if (tag.equals("LINK")) {
-            this.type = ElementType.HTML_LINK;
-        } else if (tag.equals("INPUT")) {
-            this.type = ElementType.HTML_INPUT;
-        } else if (tag.equals("BUTTON")) {
-            this.type = ElementType.HTML_BUTTON;
-        } else if (tag.equals("FOOTER")) {
-            this.type = ElementType.HTML_FOOTER;
-        } else if (tag.equals("HTML")) {
-            this.type = ElementType.HTML_DOCUMENT;
-        } else if (tag.equals("FORM")) {
-            this.type = ElementType.HTML_FORMULARY;
-        } else if (tag.equals("LI")) {
-            this.type = ElementType.HTML_LIST_ITEM;
-        } else if (tag.equals("P")) {
-            this.type = ElementType.HTML_PARAGRAPH;
-        } else if (tag.equals("BR")) {
-            this.type = ElementType.HTML_LINE_BREAK;
-        } else if (tag.equals("UL")) {
-            this.type = ElementType.HTML_UNORDERED_LIST;
-        } else {
+        switch (type) {
+            case HTML_DIV:
+                supported = tag.equals("DIV");
+                break;
+            case HTML_HEAD:
+                supported = tag.equals("HEAD");
+                break;
+            case HTML_BODY:
+                supported = tag.equals("BODY");
+                break;
+            case HTML_BOLD:
+                supported = tag.equals("BOLD");
+                break;
+            case HTML_LINK:
+                supported = tag.equals("LINK");
+                break;
+            case HTML_INPUT:
+                supported = tag.equals("INPUT");
+                break;
+            case HTML_BUTTON:
+                supported = tag.equals("BUTTON");
+                break;
+            case HTML_FOOTER:
+                supported = tag.equals("FOOTER");
+                break;
+            case HTML_DOCUMENT:
+                supported = tag.equals("HTML");
+                break;
+            case HTML_FORMULARY:
+                supported = tag.equals("FORM");
+                break;
+            case HTML_LIST_ITEM:
+                supported = tag.equals("LI");
+                break;
+            case HTML_PARAGRAPH:
+                supported = tag.equals("P");
+                break;
+            case HTML_LINE_BREAK:
+                supported = tag.equals("BR");
+                break;
+            case HTML_UNORDERED_LIST:
+                supported = tag.equals("UL");
+                break;
+            default:
+                break;
+        }
+        if (!supported) {
             throw new IllegalArgumentException("Tag is unsupported");
         }
         this.pointer = pointer;
-        elements.add(this);
-    }
-
-    public Element(ElementType tag) {
-        switch (tag) {
-            case HTML_DIV:
-                pointer = getDocumentCreateElement("div");
-                break;
-            case HTML_HEAD:
-                pointer = getDocumentCreateElement("head");
-                break;
-            case HTML_BODY:
-                pointer = getDocumentCreateElement("body");
-                break;
-            case HTML_BOLD:
-                pointer = getDocumentCreateElement("bold");
-                break;
-            case HTML_LINK:
-                pointer = getDocumentCreateElement("link");
-                break;
-            case HTML_INPUT:
-                pointer = getDocumentCreateElement("input");
-                break;
-            case HTML_BUTTON:
-                pointer = getDocumentCreateElement("button");
-                break;
-            case HTML_FOOTER:
-                pointer = getDocumentCreateElement("footer");
-                break;
-            case HTML_DOCUMENT:
-                pointer = getDocumentCreateElement("html");
-                break;
-            case HTML_FORMULARY:
-                pointer = getDocumentCreateElement("form");
-                break;
-            case HTML_LIST_ITEM:
-                pointer = getDocumentCreateElement("li");
-                break;
-            case HTML_PARAGRAPH:
-                pointer = getDocumentCreateElement("p");
-                break;
-            case HTML_LINE_BREAK:
-                pointer = getDocumentCreateElement("br");
-                break;
-            case HTML_UNORDERED_LIST:
-                pointer = getDocumentCreateElement("ul");
-                break;
-            default:
-                throw new IllegalArgumentException("Tag is unsupported");
-        }
-        type = tag;
+        this.document = document;
         elements.add(this);
     }
 
@@ -163,17 +133,6 @@ public class Element extends EventListener {
 
     public Element setContent(String value) {
         setHtmlElementInnerText(pointer, value);
-        return this;
-    }
-
-    public Element addStylesheet(String path) throws ElementOperationUnsupported {
-        if (type != ElementType.HTML_HEAD) {
-            throw new ElementOperationUnsupported();
-        }
-        Element element = new Element(ElementType.HTML_LINK);
-        element.setAttribute("rel", "stylesheet");
-        element.setAttribute("href", path);
-        append(element);
         return this;
     }
 

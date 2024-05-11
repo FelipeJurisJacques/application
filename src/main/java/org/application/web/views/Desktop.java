@@ -1,14 +1,14 @@
 package org.application.web.views;
 
-import org.application.core.elements.Document;
 import org.application.core.elements.Element;
+import org.application.core.elements.Document;
+import org.application.core.elements.HtmlHead;
 import org.application.core.elements.ElementType;
-import org.application.core.exceptions.ElementOperationUnsupported;
 
 public class Desktop {
-        public Desktop() throws ElementOperationUnsupported {
+        public Desktop() {
                 Document document = Document.getInstance();
-                Element head = document.getHead();
+                HtmlHead head = document.getHead();
                 head.addStylesheet("./source/stylesheet/index.css");
                 head.addStylesheet("./source/stylesheet/window.css");
                 head.addStylesheet("./source/stylesheet/task_bar.css");
@@ -16,17 +16,17 @@ public class Desktop {
 
                 Element body = document.getBody();
 
-                Element start = new Element(ElementType.HTML_BUTTON);
+                Element start = document.createElement(ElementType.HTML_BUTTON);
                 start.setClassName("start");
                 start.setTitle("Start");
 
-                Element footer = new Element(ElementType.HTML_FOOTER);
+                Element footer = document.createElement(ElementType.HTML_FOOTER);
                 footer.setClassName("task_bar");
                 footer.append(start);
 
-                Element desktop = new Element(ElementType.HTML_DIV);
+                Element desktop = document.createElement(ElementType.HTML_DIV);
                 desktop.setClassName("desktop");
-                desktop.append(new Element(ElementType.HTML_DIV).setClassName("bar"));
+                desktop.append(document.createElement(ElementType.HTML_DIV).setClassName("bar"));
 
                 body.append(desktop);
                 body.append(footer);
@@ -36,10 +36,10 @@ public class Desktop {
                 // public void actionPerformed(Event event) {
                 // Console.log('a');
                 // if (event.getType() == EventType.CLICK) {
-                // Element explorer = new Element(ElementType.HTML_BUTTON);
+                // Element explorer = document.createElement(ElementType.HTML_BUTTON);
                 // explorer.setClassName("explorer");
                 // explorer.setContent("Explorador de arquivos");
-                // Element curriculum = new Element(ElementType.HTML_BUTTON);
+                // Element curriculum = document.createElement(ElementType.HTML_BUTTON);
                 // curriculum.setClassName("curriculum");
                 // curriculum.setContent("Currículo");
                 // // curriculum.addActionListener(new ActionListener() {
