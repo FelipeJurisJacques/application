@@ -6,11 +6,12 @@ C:\Users\felip\workspace\application\src\main\java\org\application\core\event\Ev
 C:\Users\felip\workspace\application\src\main\java\org\application\core\observer\Subject.java
 C:\Users\felip\workspace\application\src\main\java\org\application\core\elements\Window.java
 C:\Users\felip\workspace\application\src\main\java\org\application\core\elements\Document.java
-C:\Users\felip\workspace\application\src\main\java\org\application\core\exceptions\ElementOperationUnsupported.java
 C:\Users\felip\workspace\application\src\main\java\org\application\core\event\ActionListener.java
+C:\Users\felip\workspace\application\src\main\java\org\application\core\elements\html\Head.java
 C:\Users\felip\workspace\application\src\main\java\org\application\web\widgets\Window.java
 C:\Users\felip\workspace\application\src\main\java\org\application\core\asynchronous\MessageObserver.java
 C:\Users\felip\workspace\application\src\main\java\org\application\web\widgets\Curriculum.java
+C:\Users\felip\workspace\application\src\main\java\org\application\core\elements\html\Body.java
 C:\Users\felip\workspace\application\src\main\java\org\application\core\event\Event.java
 C:\Users\felip\workspace\application\src\main\java\org\application\core\Native.java
 C:\Users\felip\workspace\application\src\main\java\org\application\core\observer\Observer.java

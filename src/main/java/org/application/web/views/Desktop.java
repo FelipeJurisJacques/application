@@ -2,13 +2,13 @@ package org.application.web.views;
 
 import org.application.core.elements.Element;
 import org.application.core.elements.Document;
-import org.application.core.elements.HtmlHead;
+import org.application.core.elements.html.Head;
 import org.application.core.elements.ElementType;
 
 public class Desktop {
         public Desktop() {
                 Document document = Document.getInstance();
-                HtmlHead head = document.getHead();
+                Head head = document.getHead();
                 head.addStylesheet("./source/stylesheet/index.css");
                 head.addStylesheet("./source/stylesheet/window.css");
                 head.addStylesheet("./source/stylesheet/task_bar.css");

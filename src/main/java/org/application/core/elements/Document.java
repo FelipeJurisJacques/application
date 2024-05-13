@@ -1,6 +1,8 @@
 package org.application.core.elements;
 
 import org.application.core.Native;
+import org.application.core.elements.html.Body;
+import org.application.core.elements.html.Head;
 
 public class Document extends Native {
     protected static Document document = new Document(getDocument());
@@ -14,48 +16,46 @@ public class Document extends Native {
         this.pointer = pointer;
     }
 
-    public HtmlHead getHead() {
-        Object reference = getHtmlHeadElement(pointer);
-        HtmlHead element = (HtmlHead) Element.getElement(reference);
-        return element == null ? new HtmlHead(this, reference) : element;
+    public Head getHead() {
+        Head element = (Head) Element.getElement(getHtmlHeadElement(pointer));
+        return element == null ? new Head(this) : element;
     }
 
-    public HtmlBody getBody() {
-        Object reference = getHtmlBodyElement(pointer);
-        HtmlBody element = (HtmlBody) Element.getElement(reference);
-        return element == null ? new HtmlBody(this, reference) : element;
+    public Body getBody() {
+        Body element = (Body) Element.getElement(getHtmlBodyElement(pointer));
+        return element == null ? new Body(this) : element;
     }
 
     public Element createElement(ElementType type) {
         switch (type) {
             case HTML_DIV:
-                return new Element(this, getDocumentCreateElement(pointer, "div"), type);
+                return new Element(this, type);
             case HTML_HEAD:
-                return new HtmlHead(this, getDocumentCreateElement(pointer, "head"));
+                return new Head(this);
             case HTML_BODY:
-                return new Element(this, getDocumentCreateElement(pointer, "body"), type);
+                return new Body(this);
             case HTML_BOLD:
-                return new Element(this, getDocumentCreateElement(pointer, "bold"), type);
+                return new Element(this, type);
             case HTML_LINK:
-                return new Element(this, getDocumentCreateElement(pointer, "link"), type);
+                return new Element(this, type);
             case HTML_INPUT:
-                return new Element(this, getDocumentCreateElement(pointer, "input"), type);
+                return new Element(this, type);
             case HTML_BUTTON:
-                return new Element(this, getDocumentCreateElement(pointer, "button"), type);
+                return new Element(this, type);
             case HTML_FOOTER:
-                return new Element(this, getDocumentCreateElement(pointer, "footer"), type);
+                return new Element(this, type);
             case HTML_DOCUMENT:
-                return new Element(this, getDocumentCreateElement(pointer, "html"), type);
+                return new Element(this, type);
             case HTML_FORMULARY:
-                return new Element(this, getDocumentCreateElement(pointer, "form"), type);
+                return new Element(this, type);
             case HTML_LIST_ITEM:
-                return new Element(this, getDocumentCreateElement(pointer, "li"), type);
+                return new Element(this, type);
             case HTML_PARAGRAPH:
-                return new Element(this, getDocumentCreateElement(pointer, "p"), type);
+                return new Element(this, type);
             case HTML_LINE_BREAK:
-                return new Element(this, getDocumentCreateElement(pointer, "br"), type);
+                return new Element(this, type);
             case HTML_UNORDERED_LIST:
-                return new Element(this, getDocumentCreateElement(pointer, "ul"), type);
+                return new Element(this, type);
             default:
                 throw new IllegalArgumentException("Tag is unsupported");
         }

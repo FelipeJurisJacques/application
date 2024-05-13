@@ -26,62 +26,59 @@ public class Element extends EventListener {
         return null;
     }
 
-    protected Element(Document document, Object pointer, ElementType type) {
-        if (pointer == null) {
-            throw new IllegalArgumentException("Element not nullable");
-        }
-        boolean supported = false;
-        String tag = getHtmlElementTagName(pointer);
+    protected Element(Document document, ElementType type) {
         switch (type) {
             case HTML_DIV:
-                supported = tag.equals("DIV");
+                pointer = getDocumentCreateElement(document.pointer, "DIV");
                 break;
             case HTML_HEAD:
-                supported = tag.equals("HEAD");
+                pointer = getHtmlHeadElement(document.pointer);
+                if (pointer == null) {
+                    pointer = getDocumentCreateElement(document.pointer, "HEAD");
+                }
                 break;
             case HTML_BODY:
-                supported = tag.equals("BODY");
+                pointer = getHtmlBodyElement(document.pointer);
+                if (pointer == null) {
+                    pointer = getDocumentCreateElement(document.pointer, "BODY");
+                }
                 break;
             case HTML_BOLD:
-                supported = tag.equals("BOLD");
+                pointer = getDocumentCreateElement(document.pointer, "BOLD");
                 break;
             case HTML_LINK:
-                supported = tag.equals("LINK");
+                pointer = getDocumentCreateElement(document.pointer, "LINK");
                 break;
             case HTML_INPUT:
-                supported = tag.equals("INPUT");
+                pointer = getDocumentCreateElement(document.pointer, "INPUT");
                 break;
             case HTML_BUTTON:
-                supported = tag.equals("BUTTON");
+                pointer = getDocumentCreateElement(document.pointer, "BUTTON");
                 break;
             case HTML_FOOTER:
-                supported = tag.equals("FOOTER");
+                pointer = getDocumentCreateElement(document.pointer, "FOOTER");
                 break;
             case HTML_DOCUMENT:
-                supported = tag.equals("HTML");
+                pointer = getDocumentCreateElement(document.pointer, "HTML");
                 break;
             case HTML_FORMULARY:
-                supported = tag.equals("FORM");
+                pointer = getDocumentCreateElement(document.pointer, "FORM");
                 break;
             case HTML_LIST_ITEM:
-                supported = tag.equals("LI");
+                pointer = getDocumentCreateElement(document.pointer, "LI");
                 break;
             case HTML_PARAGRAPH:
-                supported = tag.equals("P");
+                pointer = getDocumentCreateElement(document.pointer, 'P');
                 break;
             case HTML_LINE_BREAK:
-                supported = tag.equals("BR");
+                pointer = getDocumentCreateElement(document.pointer, "BR");
                 break;
             case HTML_UNORDERED_LIST:
-                supported = tag.equals("UL");
+                pointer = getDocumentCreateElement(document.pointer, "UL");
                 break;
             default:
-                break;
+                throw new IllegalArgumentException("Tag is unsupported");
         }
-        if (!supported) {
-            throw new IllegalArgumentException("Tag is unsupported");
-        }
-        this.pointer = pointer;
         this.document = document;
         elements.add(this);
     }
