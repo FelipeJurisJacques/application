@@ -14,4 +14,10 @@ public class Event extends Native {
     public EventType getType() {
         return type;
     }
+
+    @Override
+    public void finalize() {
+        this.type = null;
+        this.pointer = null;
+    }
 }

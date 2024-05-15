@@ -1,24 +1,26 @@
 package org.application.core.elements;
 
-import java.util.Map;
-import java.util.LinkedHashMap;
 import org.application.core.Native;
 import org.application.core.event.EventType;
+import org.application.core.event.EventListener;
 import org.application.core.event.ActionListener;
 
 class Handler extends Native {
-    Map<EventType, ActionListener> eventListeners;
+    EventListener eventListeners;
 
     protected Handler() {
-        // this.eventListeners = new LinkedHashMap<>();
+        this.eventListeners = new EventListener();
     }
 
     public void setOnClick(ActionListener observer) {
-        // eventListeners.put(EventType.CLICK, observer);
+        eventListeners.put(EventType.CLICK, observer);
     }
 
     @Override
     public void finalize() {
-        // eventListeners = null;
+        if (this.eventListeners != null) {
+            this.eventListeners.finalize();
+            this.eventListeners = null;
+        }
     }
 }

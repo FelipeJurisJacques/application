@@ -7,6 +7,7 @@ org\application\core\asynchronous\MessageObserver.class
 org\application\core\elements\Document.class
 org\application\core\Native.class
 org\application\core\observer\Subject.class
+org\application\core\event\Handler.class
 org\application\web\views\Desktop.class
 org\application\core\elements\Handler.class
 Application.class
@@ -15,6 +16,7 @@ org\application\core\elements\html\Head.class
 org\application\web\widgets\Window.class
 org\application\core\event\ActionListener.class
 org\application\core\elements\Document$1.class
+org\application\web\views\Desktop$1.class
 org\application\core\draw\Vector2.class
 org\application\core\event\Event.class
 org\application\core\event\EventListener.class

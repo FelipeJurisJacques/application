@@ -1,8 +1,10 @@
 package org.application.web.views;
 
+import org.application.core.event.Event;
 import org.application.core.elements.Element;
 import org.application.core.elements.Document;
 import org.application.core.elements.html.Head;
+import org.application.core.event.ActionListener;
 import org.application.core.elements.ElementType;
 
 public class Desktop {
@@ -34,34 +36,40 @@ public class Desktop {
                 body.append(desktop);
                 body.append(footer);
 
-                // start.addActionListener(new ActionListener() {
-                // @Override
-                // public void actionPerformed(Event event) {
-                // Console.log('a');
-                // if (event.getType() == EventType.CLICK) {
-                // Element explorer = document.createElement(ElementType.HTML_BUTTON);
-                // explorer.setClassName("explorer");
-                // explorer.setContent("Explorador de arquivos");
-                // Element curriculum = document.createElement(ElementType.HTML_BUTTON);
-                // curriculum.setClassName("curriculum");
-                // curriculum.setContent("Currículo");
-                // // curriculum.addActionListener(new ActionListener() {
-                // // @Override
-                // // public void actionPerformed(Event event) {
-                // // if (event.getType() == EventType.CLICK) {
-                // // body.append(new Curriculum());
-                // // }
-                // // }
-                // // });
-                // Widget ul = Widget.create("ul");
-                // Widget menu = Widget.create("div");
-                // menu.setClassName("start_menu");
-                // ul.append(Widget.create("li").append(explorer));
-                // ul.append(Widget.create("li").append(curriculum));
-                // menu.append(ul);
-                // desktop.append(menu);
-                // }
-                // }
-                // });
+                start.setOnClick(new ActionListener() {
+                        @Override
+                        public void actionPerformed(Event event) {
+                                Element explorer = document.createElement(ElementType.HTML_BUTTON);
+                                explorer.setClassName("explorer");
+                                explorer.setContent("Explorador de arquivos");
+
+                                Element curriculum = document.createElement(ElementType.HTML_BUTTON);
+                                curriculum.setClassName("curriculum");
+                                curriculum.setContent("Currículo");
+
+                                // curriculum.addActionListener(new ActionListener() {
+                                // @Override
+                                // public void actionPerformed(Event event) {
+                                // if (event.getType() == EventType.CLICK) {
+                                // body.append(new Curriculum());
+                                // }
+                                // }
+                                // });
+                                Element ul = document.createElement(ElementType.HTML_UNORDERED_LIST);
+                                
+                                Element menu = document.createElement(ElementType.HTML_DIV);
+                                menu.setClassName("start_menu");
+                                menu.append(ul);
+                                desktop.append(menu);
+
+                                Element li = document.createElement(ElementType.HTML_LIST_ITEM);
+                                li.append(explorer);
+                                ul.append(li);
+
+                                li = document.createElement(ElementType.HTML_LIST_ITEM);
+                                li.append(curriculum);
+                                ul.append(li);
+                        }
+                });
         }
 }

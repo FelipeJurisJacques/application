@@ -19,23 +19,17 @@ public class Window extends Native {
     }
 
     public static void eventDispatch(Object data) {
-        // boolean clicked = false;
-        // boolean doubleClicked = false;
-        // Element element = Element.getElement(getEventTarget(data));
-        // ActionListener listener;
-        // while (element != null) {
-        //     if (!clicked) {
-        //         listener = element.eventListeners.get(EventType.CLICK);
-        //         if (listener != null) {
-        //             listener.actionPerformed(new Event(listener, EventType.CLICK));
-        //             clicked = true;
-        //         }
-        //     }
-        //     if (clicked && doubleClicked) {
-        //         break;
-        //     }
-        //     element = element.getParentElement();
-        // }
+        boolean clicked = false;
+        Element element = Element.getElement(getEventTarget(data));
+        while (element != null) {
+            if (!clicked && element.eventListeners.execute(EventType.CLICK, data)) {
+                clicked = true;
+            }
+            if (clicked) {
+                break;
+            }
+            element = element.getParentElement();
+        }
     }
 
     private Window(Object pointer) {
