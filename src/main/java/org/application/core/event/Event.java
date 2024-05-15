@@ -6,21 +6,12 @@ public class Event extends Native {
     protected Object pointer;
     protected EventType type;
 
-    public Event(Object pointer) {
-        String type = getEventType(pointer);
+    public Event(Object pointer, EventType type) {
+        this.type = type;
         this.pointer = pointer;
-        if (type.equals("click")) {
-            this.type = EventType.CLICK;
-        } else {
-            this.type = EventType.NONE;
-        }
     }
 
     public EventType getType() {
         return type;
     }
-
-    // public Widget getTarget() {
-    //     return new Widget(getEventTarget(pointer));
-    // }
 }

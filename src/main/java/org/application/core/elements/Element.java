@@ -2,16 +2,15 @@ package org.application.core.elements;
 
 import java.util.List;
 import java.util.ArrayList;
-import org.application.core.event.EventListener;
 
 /**
  * @author felipe
  */
-public class Element extends EventListener {
-    protected static List<Element> elements = new ArrayList<>();
+public class Element extends Handler {
     protected Object pointer;
     protected ElementType type;
     protected Document document;
+    protected static List<Element> elements = new ArrayList<>();
 
     public static Element getElement(Object pointer) {
         if (elements.size() > 0) {
@@ -27,18 +26,19 @@ public class Element extends EventListener {
     }
 
     protected Element(Document document, ElementType type) {
+        super();
         switch (type) {
             case HTML_DIV:
                 pointer = getDocumentCreateElement(document.pointer, "DIV");
                 break;
             case HTML_HEAD:
-                pointer = getHtmlHeadElement(document.pointer);
+                pointer = getElementHead(document.pointer);
                 if (pointer == null) {
                     pointer = getDocumentCreateElement(document.pointer, "HEAD");
                 }
                 break;
             case HTML_BODY:
-                pointer = getHtmlBodyElement(document.pointer);
+                pointer = getElementBody(document.pointer);
                 if (pointer == null) {
                     pointer = getDocumentCreateElement(document.pointer, "BODY");
                 }
@@ -79,94 +79,84 @@ public class Element extends EventListener {
             default:
                 throw new IllegalArgumentException("Tag is unsupported");
         }
+        this.type = type;
         this.document = document;
         elements.add(this);
     }
 
-    public Object getPointer() {
-        return pointer;
-    }
-
     public String getAttribute(String name) {
-        return getHtmlElementAttribute(pointer, name);
+        return getElementAttribute(pointer, name);
     }
 
-    public Element setAttribute(String name, String value) {
-        setHtmlElementAttribute(pointer, name, value);
-        return this;
+    public void setAttribute(String name, String value) {
+        setElementAttribute(pointer, name, value);
     }
 
-    public Element append(Element element) {
-        setHtmlElementAppend(pointer, element.pointer);
-        return this;
+    public void append(Element element) {
+        setElementAppend(pointer, element.pointer);
     }
 
-    public Element setId(String value) {
+    public void setId(String value) {
         setAttribute("class", value);
-        return this;
     }
 
     public String getClassName() {
         return getAttribute("class");
     }
 
-    public Element setClassName(String value) {
+    public void setClassName(String value) {
         setAttribute("class", value);
-        return this;
     }
 
     public String setTitle() {
         return getAttribute("title");
     }
 
-    public Element setTitle(String value) {
+    public void setTitle(String value) {
         setAttribute("title", value);
-        return this;
     }
 
     public String getContent() {
-        return getHtmlElementInnerText(pointer);
+        return getElementInnerText(pointer);
     }
 
-    public Element setContent(String value) {
-        setHtmlElementInnerText(pointer, value);
-        return this;
+    public void setContent(String value) {
+        setElementInnerText(pointer, value);
+    }
+
+    public Element getParentElement() {
+        return getElement(getElementParentElement(pointer));
     }
 
     public void remove() {
-        setHtmlElementRemove(pointer);
+        setElementRemove(pointer);
         finalize();
     }
 
     @Override
     public void finalize() {
         if (pointer != null) {
-            int length = getHtmlElementChildrenLength(pointer);
+            int length = getElementChildrenLength(pointer);
             if (length > 0) {
-                Object child = null;
-                Element element = null;
+                Element element;
                 for (int i = 0; i < length; i++) {
-                    child = getHtmlElementChildrenItem(pointer, i);
-                    for (int j = 0; j < elements.size(); j++) {
-                        element = elements.get(i);
-                        if (equals(child, element.getPointer())) {
-                            element.finalize();
-                            break;
-                        }
+                    element = getElement(getElementChildrenItem(pointer, i));
+                    if (element != null) {
+                        element.finalize();
                     }
                 }
-                child = null;
                 element = null;
             }
-            removeEventListener(pointer);
             for (int i = 0; i < elements.size(); i++) {
-                if (equals(pointer, elements.get(i).getPointer())) {
+                if (equals(elements.get(i))) {
                     elements.remove(i);
                     break;
                 }
             }
         }
-        super.finalize();
+        type = null;
         pointer = null;
+        document = null;
+        super.finalize();
     }
 }

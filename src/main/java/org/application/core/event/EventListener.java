@@ -1,111 +1,27 @@
 package org.application.core.event;
 
-import java.util.List;
-import java.util.ArrayList;
 import org.application.core.Native;
+// import org.application.core.Console;
+// import org.application.core.elements.Window;
 
 /**
  * OUVINTE DE EVENTOS
  * 
  * toma acao a partir de qualquer evento recebido pelo js
  */
-public class EventListener extends Native {
-    private static List<Handler> handlers = new ArrayList<>();
-    private static List<Listener> listeners = new ArrayList<>();
+public abstract class EventListener extends Native {
 
     public static void eventDispatch(Object data) {
-        if (handlers.size() > 0) {
-            Event event = new Event(data);
-            Object target = getEventTarget(data);
-            Handler handler = null;
-            for (int i = 0; i < handlers.size(); i++) {
-                handler = handlers.get(i);
-                if (equals(target, handler.getPointer())) {
-                    handler.eventDispatch(event);
-                }
-            }
-        }
-    }
-
-    protected static void addEventListener(Object pointer, EventType type, ActionListener observer) {
-        String name = null;
-        Handler handler = null;
-        for (int i = 0; i < handlers.size(); i++) {
-            handler = handlers.get(i);
-            if (!equals(pointer, handler.getPointer())) {
-                handler = null;
-                continue;
-            }
-            handler.addActionListener(observer);
-            break;
-        }
-        if (handler == null) {
-            handler = new Handler(pointer);
-            handler.addActionListener(observer);
-            handlers.add(handler);
-        }
-        handler = null;
-        switch (type) {
-            case CLICK:
-            case CLICK_AWAY:
-                name = "click";
-                pointer = getWindow();
-                break;
-            case NONE:
-            default:
-                pointer = null;
-                break;
-        }
-        setConsoleLogString(name);
-        setConsoleLogObject(pointer);
-        if (name != null && pointer != null) {
-            Listener listener = null;
-            for (int i = 0; i < listeners.size(); i++) {
-                listener = listeners.get(i);
-                if (!equals(pointer, listener.getPointer())) {
-                    listener = null;
-                    continue;
-                }
-                listener.addEventType(name);
-                break;
-            }
-            if (listener == null) {
-                listener = new Listener(pointer);
-                listener.addEventType(name);
-                listeners.add(listener);
-            }
-            listener = null;
-        }
-    }
-
-    protected static void removeEventListener(Object pointer) {
-        if (handlers.size() > 0) {
-            Handler handler = null;
-            for (int i = 0; i < handlers.size(); i++) {
-                handler = handlers.get(i);
-                if (equals(pointer, handler.getPointer())) {
-                    handler.finalize();
-                    handlers.remove(i);
-                    break;
-                }
-            }
-            handler = null;
-        }
-        if (listeners.size() > 0) {
-            Listener listener = null;
-            for (int i = 0; i < listeners.size(); i++) {
-                listener = listeners.get(i);
-                if (equals(pointer, listener.getPointer())) {
-                    listener.finalize();
-                    listeners.remove(i);
-                    break;
-                }
-            }
-            listener = null;
-        }
-    }
-
-    @Override
-    public void finalize() {
+        // try {
+        //     if (data == null) {
+        //         throw new IllegalArgumentException("event not nullable");
+        //     }
+        //     String type = getEventType(data);
+        //     if (type.equals("click")) {
+        //         Window.eventDispatch(data);
+        //     }
+        // } catch (Throwable error) {
+        //     Console.error(error);
+        // }
     }
 }

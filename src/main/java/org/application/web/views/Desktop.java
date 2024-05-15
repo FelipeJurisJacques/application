@@ -26,7 +26,10 @@ public class Desktop {
 
                 Element desktop = document.createElement(ElementType.HTML_DIV);
                 desktop.setClassName("desktop");
-                desktop.append(document.createElement(ElementType.HTML_DIV).setClassName("bar"));
+
+                Element bar = document.createElement(ElementType.HTML_DIV);
+                bar.setClassName("bar");
+                desktop.append(bar);
 
                 body.append(desktop);
                 body.append(footer);

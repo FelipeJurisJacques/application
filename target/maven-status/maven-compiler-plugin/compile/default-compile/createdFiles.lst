@@ -1,15 +1,14 @@
 org\application\core\Console.class
+org\application\core\elements\html\Link.class
 org\application\core\elements\Window.class
 org\application\core\observer\Observer.class
 org\application\core\asynchronous\Asynchronous.class
 org\application\core\asynchronous\MessageObserver.class
 org\application\core\elements\Document.class
 org\application\core\Native.class
-org\application\core\event\Listener.class
 org\application\core\observer\Subject.class
-org\application\core\event\Handler.class
-org\application\core\event\EventListener$1.class
 org\application\web\views\Desktop.class
+org\application\core\elements\Handler.class
 Application.class
 org\application\web\widgets\Curriculum.class
 org\application\core\elements\html\Head.class

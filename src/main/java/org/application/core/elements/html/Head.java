@@ -10,11 +10,10 @@ public class Head extends Element {
         super(document, ElementType.HTML_HEAD);
     }
 
-    public Head addStylesheet(String path) {
-        Element element = document.createElement(ElementType.HTML_LINK);
-        element.setAttribute("rel", "stylesheet");
-        element.setAttribute("href", path);
+    public void addStylesheet(String path) {
+        Link element = new Link(document);
+        element.setRel("stylesheet");
+        element.setHref(path);
         append(element);
-        return this;
     }
 }

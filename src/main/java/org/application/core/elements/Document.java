@@ -3,26 +3,29 @@ package org.application.core.elements;
 import org.application.core.Native;
 import org.application.core.elements.html.Body;
 import org.application.core.elements.html.Head;
+import org.application.core.elements.html.Link;
 
 public class Document extends Native {
-    protected static Document document = new Document(getDocument());
+    protected Window window;
     protected Object pointer;
 
     public static Document getInstance() {
-        return document;
+        Window window = Window.getInstance();
+        return window.getDocument();
     }
 
-    public Document(Object pointer) {
-        this.pointer = pointer;
+    protected Document(Window window) {
+        this.window = window;
+        this.pointer = getWindowDocument(window.pointer);
     }
 
     public Head getHead() {
-        Head element = (Head) Element.getElement(getHtmlHeadElement(pointer));
+        Head element = (Head) Element.getElement(getElementHead(pointer));
         return element == null ? new Head(this) : element;
     }
 
     public Body getBody() {
-        Body element = (Body) Element.getElement(getHtmlBodyElement(pointer));
+        Body element = (Body) Element.getElement(getElementBody(pointer));
         return element == null ? new Body(this) : element;
     }
 
@@ -37,7 +40,7 @@ public class Document extends Native {
             case HTML_BOLD:
                 return new Element(this, type);
             case HTML_LINK:
-                return new Element(this, type);
+                return new Link(this);
             case HTML_INPUT:
                 return new Element(this, type);
             case HTML_BUTTON:
@@ -59,5 +62,10 @@ public class Document extends Native {
             default:
                 throw new IllegalArgumentException("Tag is unsupported");
         }
+    }
+
+    @Override
+    public void finalize() {
+        pointer = null;
     }
 }

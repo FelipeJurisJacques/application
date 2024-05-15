@@ -91,18 +91,21 @@ public abstract class Native {
     @Import(module = "window", js = "() => { return window }")
     protected static native Object getWindow();
 
+    @Import(module = "window", js = "w => { return w.document }")
+    protected static native Object getWindowDocument(Object pointer);
+
     // ELEMENTS
 
-    protected static String getHtmlElementTagName(Object pointer) {
-        return _getString(_getHtmlElementTagName(pointer));
+    protected static String getElementTagName(Object pointer) {
+        return _getString(_getElementTagName(pointer));
     }
 
-    protected static String getHtmlElementInnerText(Object pointer) {
-        return _getString(_getHtmlElementInnerText(pointer));
+    protected static String getElementInnerText(Object pointer) {
+        return _getString(_getElementInnerText(pointer));
     }
 
-    protected static void setHtmlElementInnerText(Object pointer, String value) {
-        _setHtmlElementInnerText(pointer, _toString(value));
+    protected static void setElementInnerText(Object pointer, String value) {
+        _setElementInnerText(pointer, _toString(value));
     }
 
     protected static Object getDocumentCreateElement(char name) {
@@ -121,49 +124,49 @@ public abstract class Native {
         return _getDocumentCreateElement(pointer, _toString(name));
     }
 
-    protected static String getHtmlElementAttribute(Object pointer, String name) {
-        return _getString(_getHtmlElementAttribute(pointer, _toString(name)));
+    protected static String getElementAttribute(Object pointer, String name) {
+        return _getString(_getElementAttribute(pointer, _toString(name)));
     }
 
-    protected static void setHtmlElementAttribute(Object pointer, String name, String value) {
-        _setHtmlElementAttribute(pointer, _toString(name), _toString(value));
+    protected static void setElementAttribute(Object pointer, String name, String value) {
+        _setElementAttribute(pointer, _toString(name), _toString(value));
     }
 
-    @Import(module = "native", name = "getDocument", js = "() => document")
-    protected static native Object getDocument();
+    @Import(module = "native", name = "getElementParentElement", js = "e => e.parentElement")
+    protected static native Object getElementParentElement(Object pointer);
 
-    @Import(module = "native", name = "getHtmlBodyElement", js = "o => o.body")
-    protected static native Object getHtmlBodyElement(Object pointer);
+    @Import(module = "native", name = "getElementBody", js = "e => e.body")
+    protected static native Object getElementBody(Object pointer);
 
-    @Import(module = "native", name = "getHtmlHeadElement", js = "o => o.head")
-    protected static native Object getHtmlHeadElement(Object pointer);
+    @Import(module = "native", name = "getElementHead", js = "e => e.head")
+    protected static native Object getElementHead(Object pointer);
 
-    @Import(module = "native", name = "setHtmlElementRemove", js = "o => o.remove()")
-    protected static native void setHtmlElementRemove(Object pointer);
+    @Import(module = "native", name = "setElementRemove", js = "e => e.remove()")
+    protected static native void setElementRemove(Object pointer);
 
-    @Import(module = "native", name = "setHtmlElementAppend", js = "(o, c) => o.append(c)")
-    protected static native void setHtmlElementAppend(Object pointer, Object child);
+    @Import(module = "native", name = "setElementAppend", js = "(o, c) => o.append(c)")
+    protected static native void setElementAppend(Object pointer, Object child);
 
-    @Import(module = "native", name = "getHtmlElementChildrenItem", js = "(e, i) => e.children.item(i)")
-    protected static native Object getHtmlElementChildrenItem(Object pointer, int index);
+    @Import(module = "native", name = "getElementChildrenItem", js = "(e, i) => e.children.item(i)")
+    protected static native Object getElementChildrenItem(Object pointer, int index);
 
-    @Import(module = "native", name = "getHtmlElementChildrenLength", js = "e => e.children.length")
-    protected static native int getHtmlElementChildrenLength(Object pointer);
+    @Import(module = "native", name = "getElementChildrenLength", js = "e => e.children.length")
+    protected static native int getElementChildrenLength(Object pointer);
 
-    @Import(module = "native", name = "getHtmlElementTagName", js = "e => e.tagName")
-    private static native Object _getHtmlElementTagName(Object pointer);
+    @Import(module = "native", name = "getElementTagName", js = "e => e.tagName")
+    private static native Object _getElementTagName(Object pointer);
 
-    @Import(module = "native", name = "setHtmlElementAttribute", js = "(e, n, v) => e.setAttribute(n, v)")
-    private static native void _setHtmlElementAttribute(Object pointer, Object name, Object value);
+    @Import(module = "native", name = "setElementAttribute", js = "(e, n, v) => e.setAttribute(n, v)")
+    private static native void _setElementAttribute(Object pointer, Object name, Object value);
 
-    @Import(module = "native", name = "getHtmlElementAttribute", js = "(e, n) => e.getAttribute(n)")
-    private static native Object _getHtmlElementAttribute(Object pointer, Object name);
+    @Import(module = "native", name = "getElementAttribute", js = "(e, n) => e.getAttribute(n)")
+    private static native Object _getElementAttribute(Object pointer, Object name);
 
-    @Import(module = "native", name = "getHtmlElementInnerText", js = "e => e.innerText")
-    private static native Object _getHtmlElementInnerText(Object pointer);
+    @Import(module = "native", name = "getElementInnerText", js = "e => e.innerText")
+    private static native Object _getElementInnerText(Object pointer);
 
-    @Import(module = "native", name = "setHtmlElementInnerText", js = "(o, v) => o.innerText = v")
-    private static native Object _setHtmlElementInnerText(Object pointer, Object value);
+    @Import(module = "native", name = "setElementInnerText", js = "(o, v) => o.innerText = v")
+    private static native Object _setElementInnerText(Object pointer, Object value);
 
     @Import(module = "native", name = "getDocumentCreateElement1", js = "n => document.createElement(String.fromCharCode(n))")
     private static native Object _getDocumentCreateElement(int name);
