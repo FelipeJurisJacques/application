@@ -6,9 +6,11 @@ import org.application.core.event.EventListener;
 import org.application.core.event.ActionListener;
 
 class Handler extends Native {
+    boolean focus;
     EventListener eventListeners;
 
     protected Handler() {
+        this.focus = false;
         this.eventListeners = new EventListener();
     }
 

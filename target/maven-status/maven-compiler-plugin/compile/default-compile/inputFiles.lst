@@ -14,6 +14,7 @@ C:\Users\felip\workspace\application\src\main\java\org\application\core\asynchro
 C:\Users\felip\workspace\application\src\main\java\org\application\web\Application.java
 C:\Users\felip\workspace\application\src\main\java\org\application\core\event\EventType.java
 C:\Users\felip\workspace\application\src\main\java\org\application\core\elements\Handler.java
+C:\Users\felip\workspace\application\src\main\java\org\application\core\event\Map.java
 C:\Users\felip\workspace\application\src\main\java\org\application\core\elements\Document.java
 C:\Users\felip\workspace\application\src\main\java\org\application\core\elements\html\Link.java
 C:\Users\felip\workspace\application\src\main\java\org\application\core\event\ActionListener.java
@@ -21,5 +22,4 @@ C:\Users\felip\workspace\application\src\main\java\org\application\core\elements
 C:\Users\felip\workspace\application\src\main\java\org\application\web\widgets\Window.java
 C:\Users\felip\workspace\application\src\main\java\org\application\core\asynchronous\MessageObserver.java
 C:\Users\felip\workspace\application\src\main\java\org\application\core\Console.java
-C:\Users\felip\workspace\application\src\main\java\org\application\core\event\Handler.java
 C:\Users\felip\workspace\application\src\main\java\org\application\core\elements\Element.java

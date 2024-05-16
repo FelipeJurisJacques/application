@@ -12,7 +12,7 @@ import org.application.core.elements.Window;
  * toma acao a partir de qualquer evento recebido pelo js
  */
 public class EventListener extends Native {
-    protected List<Handler> listeners;
+    protected List<Map> map;
 
     public static void eventDispatch(Object data) {
         try {
@@ -29,21 +29,21 @@ public class EventListener extends Native {
     }
 
     public EventListener() {
-        listeners = new ArrayList<>();
+        this.map = new ArrayList<>();
     }
 
     public void put(EventType type, ActionListener action) {
-        Handler handler = null;
-        for (int i = 0; i < listeners.size(); i++) {
-            handler = listeners.get(i);
-            if (type.equals(handler.type)) {
-                handler.listener = action;
+        Map item = null;
+        for (int i = 0; i < map.size(); i++) {
+            item = map.get(i);
+            if (type.equals(item.type)) {
+                item.listener = action;
                 break;
             }
         }
-        if (handler == null) {
-            handler = new Handler(type, action);
-            listeners.add(handler);
+        if (item == null) {
+            item = new Map(type, action);
+            map.add(item);
         }
     }
 
@@ -60,21 +60,21 @@ public class EventListener extends Native {
 
     @Override
     public void finalize() {
-        if (this.listeners != null) {
-            for (int i = 0; i < this.listeners.size(); i++) {
-                this.listeners.get(i).finalize();
+        if (this.map != null) {
+            for (int i = 0; i < this.map.size(); i++) {
+                this.map.get(i).finalize();
             }
-            this.listeners = null;
+            this.map = null;
         }
     }
 
     protected ActionListener get(EventType type) {
-        if (listeners.size() > 0) {
-            Handler handler;
-            for (int i = 0; i < listeners.size(); i++) {
-                handler = listeners.get(i);
-                if (type.equals(handler.type)) {
-                    return handler.listener;
+        if (map.size() > 0) {
+            Map item;
+            for (int i = 0; i < map.size(); i++) {
+                item = map.get(i);
+                if (type.equals(item.type)) {
+                    return item.listener;
                 }
             }
         }

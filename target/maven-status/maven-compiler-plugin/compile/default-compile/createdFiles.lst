@@ -7,7 +7,6 @@ org\application\core\asynchronous\MessageObserver.class
 org\application\core\elements\Document.class
 org\application\core\Native.class
 org\application\core\observer\Subject.class
-org\application\core\event\Handler.class
 org\application\web\views\Desktop.class
 org\application\core\elements\Handler.class
 Application.class
@@ -25,4 +24,5 @@ org\application\core\draw\ClipPatch.class
 org\application\core\elements\ElementType.class
 org\application\core\event\EventType.class
 org\application\core\elements\Element.class
+org\application\core\event\Map.class
 org\application\core\elements\html\Body.class

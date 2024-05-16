@@ -25,8 +25,8 @@ public class Window extends Native {
             if (!clicked && element.eventListeners.execute(EventType.CLICK, data)) {
                 clicked = true;
             }
-            if (clicked) {
-                break;
+            if (!element.focus && element.eventListeners.execute(EventType.FOCUS, data)) {
+                element.focus = true;
             }
             element = element.getParentElement();
         }

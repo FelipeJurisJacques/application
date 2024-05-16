@@ -46,7 +46,6 @@ public class Desktop {
                                 Element curriculum = document.createElement(ElementType.HTML_BUTTON);
                                 curriculum.setClassName("curriculum");
                                 curriculum.setContent("Currículo");
-
                                 // curriculum.addActionListener(new ActionListener() {
                                 // @Override
                                 // public void actionPerformed(Event event) {
@@ -55,6 +54,7 @@ public class Desktop {
                                 // }
                                 // }
                                 // });
+
                                 Element ul = document.createElement(ElementType.HTML_UNORDERED_LIST);
                                 
                                 Element menu = document.createElement(ElementType.HTML_DIV);
