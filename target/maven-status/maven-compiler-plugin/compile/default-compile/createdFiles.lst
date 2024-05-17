@@ -1,4 +1,5 @@
 org\application\core\Console.class
+org\application\web\views\Desktop$2.class
 org\application\core\elements\html\Link.class
 org\application\core\elements\Window.class
 org\application\core\observer\Observer.class
@@ -6,15 +7,18 @@ org\application\core\asynchronous\Asynchronous.class
 org\application\core\asynchronous\MessageObserver.class
 org\application\core\elements\Document.class
 org\application\core\Native.class
+org\application\core\util\Comparator.class
 org\application\core\observer\Subject.class
 org\application\web\views\Desktop.class
 org\application\core\elements\Handler.class
 Application.class
+org\application\core\util\Map.class
 org\application\web\widgets\Curriculum.class
 org\application\core\elements\html\Head.class
 org\application\web\widgets\Window.class
 org\application\core\event\ActionListener.class
 org\application\core\elements\Document$1.class
+org\application\core\util\List.class
 org\application\web\views\Desktop$1.class
 org\application\core\draw\Vector2.class
 org\application\core\event\Event.class
@@ -24,5 +28,4 @@ org\application\core\draw\ClipPatch.class
 org\application\core\elements\ElementType.class
 org\application\core\event\EventType.class
 org\application\core\elements\Element.class
-org\application\core\event\Map.class
 org\application\core\elements\html\Body.class

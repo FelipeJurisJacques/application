@@ -1,7 +1,6 @@
 package org.application.core.elements;
 
-import java.util.List;
-import java.util.ArrayList;
+import org.application.core.util.List;
 
 /**
  * @author felipe
@@ -10,7 +9,7 @@ public class Element extends Handler {
     protected Object pointer;
     protected ElementType type;
     protected Document document;
-    protected static List<Element> elements = new ArrayList<>();
+    protected static List<Element> elements = new List<>();
 
     public static Element getElement(Object pointer) {
         if (elements.size() > 0) {
@@ -23,6 +22,10 @@ public class Element extends Handler {
             }
         }
         return null;
+    }
+
+    public static List<Element> getElements() {
+        return elements;
     }
 
     protected Element(Document document, ElementType type) {

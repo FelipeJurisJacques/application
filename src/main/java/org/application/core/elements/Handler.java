@@ -18,6 +18,10 @@ class Handler extends Native {
         eventListeners.put(EventType.CLICK, observer);
     }
 
+    public void setOnWithoutFocus(ActionListener observer) {
+        eventListeners.put(EventType.WITHOUT_FOCUS, observer);
+    }
+
     @Override
     public void finalize() {
         if (this.eventListeners != null) {

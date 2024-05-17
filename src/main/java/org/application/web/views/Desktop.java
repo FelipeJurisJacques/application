@@ -8,7 +8,11 @@ import org.application.core.event.ActionListener;
 import org.application.core.elements.ElementType;
 
 public class Desktop {
+        // Element menu;
+
         public Desktop() {
+                // menu = null;
+
                 Document document = Document.getInstance();
                 Head head = document.getHead();
                 head.addStylesheet("./source/stylesheet/index.css");
@@ -36,6 +40,15 @@ public class Desktop {
                 body.append(desktop);
                 body.append(footer);
 
+                start.setOnWithoutFocus(new ActionListener() {
+                        @Override
+                        public void actionPerformed(Event event) {
+                                // if (menu != null) {
+                                //         menu.remove();
+                                //         menu = null;
+                                // }
+                        }
+                });
                 start.setOnClick(new ActionListener() {
                         @Override
                         public void actionPerformed(Event event) {
@@ -56,7 +69,7 @@ public class Desktop {
                                 // });
 
                                 Element ul = document.createElement(ElementType.HTML_UNORDERED_LIST);
-                                
+
                                 Element menu = document.createElement(ElementType.HTML_DIV);
                                 menu.setClassName("start_menu");
                                 menu.append(ul);
