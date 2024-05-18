@@ -19,33 +19,52 @@ public class Window extends Native {
 
     public static void eventDispatch(Object data) {
         boolean clicked = false;
-        // boolean interacted;
+        boolean interacted;
+        Event event;
         Element element = Element.getElement(getEventTarget(data));
         List<Element> elements = Element.getElements();
-        // org.application.core.util.List<Element> interactions = new org.application.core.util.List<Element>();
+        List<Element> interactions = new List<Element>();
         while (element != null) {
-            // interactions.add(element);
-            if (!clicked && element.eventListeners.execute(EventType.CLICK, data)) {
-                clicked = true;
-            }
-            if (!element.focus && element.eventListeners.execute(EventType.FOCUS, data)) {
-                element.focus = true;
-            }
+            interactions.add(element);
             element = element.getParentElement();
         }
-        // for (int i = 0; i < elements.size(); i++) {
-        //     element = elements.get(i);
-        //     interacted = false;
-            // for (int j = 0; j < interactions.size(); j++) {
-            //     if (element.equals(interactions.get(j))) {
-            //         interacted = true;
-            //         break;
-            //     }
-            // }
-        //     if (!interacted && element.focus && element.eventListeners.execute(EventType.WITHOUT_FOCUS, data)) {
-        //         element.focus = false;
-        //     }
-        // }
+        for (int i = 0; i < elements.size(); i++) {
+            element = elements.get(i);
+            interacted = false;
+            for (int j = 0; j < interactions.size(); j++) {
+                if (equals(element.pointer, interactions.get(j).pointer)) {
+                    interacted = true;
+                    break;
+                }
+            }
+            if (!interacted && element.eventListeners.contains(EventType.WITHOUT_FOCUS)) {
+                event = new Event(data, EventType.WITHOUT_FOCUS, element);
+                if (element.eventListeners.execute(event)) {
+                    element.focus = false;
+                }
+                event.finalize();
+                event = null;
+            }
+        }
+        for (int i = 0; i < interactions.size(); i++) {
+            element = interactions.get(i);
+            if (!clicked && element.eventListeners.contains(EventType.CLICK)) {
+                event = new Event(data, EventType.CLICK, element);
+                if (element.eventListeners.execute(event)) {
+                    clicked = true;
+                }
+                event.finalize();
+                event = null;
+            }
+            if (!element.focus && element.eventListeners.contains(EventType.FOCUS)) {
+                event = new Event(data, EventType.FOCUS, element);
+                if (element.eventListeners.execute(event)) {
+                    element.focus = true;
+                }
+                event.finalize();
+                event = null;
+            }
+        }
     }
 
     private Window(Object pointer) {

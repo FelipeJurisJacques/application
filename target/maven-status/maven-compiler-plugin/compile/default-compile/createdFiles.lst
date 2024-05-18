@@ -1,5 +1,4 @@
 org\application\core\Console.class
-org\application\web\views\Desktop$2.class
 org\application\core\elements\html\Link.class
 org\application\core\elements\Window.class
 org\application\core\observer\Observer.class
@@ -16,7 +15,9 @@ org\application\core\util\Map.class
 org\application\web\widgets\Curriculum.class
 org\application\core\elements\html\Head.class
 org\application\web\widgets\Window.class
+org\application\core\util\Item.class
 org\application\core\event\ActionListener.class
+org\application\web\views\Desktop$1$1.class
 org\application\core\elements\Document$1.class
 org\application\core\util\List.class
 org\application\web\views\Desktop$1.class

@@ -37,16 +37,16 @@ public abstract class Native {
 
     @Import(module = "native", name = "getDefaultEventHandling", js = "() => e => wasmImports.native.eventDispatch(e)")
     protected static native Object getDefaultEventHandling();
-    
+
     @Import(module = "native", name = "getEventTarget", js = "e => e.target")
     protected static native Object getEventTarget(Object pointer);
 
     @Import(module = "native", name = "getEventType", js = "e => e.type")
     private static native Object _getEventType(Object pointer);
-    
+
     @Import(module = "native", name = "addEventListener", js = "(e, n, l) => e.addEventListener(n, l)")
     private static native void _addEventListener(Object pointer, Object name, Object event);
-    
+
     @Import(module = "native", name = "removeEventListener", js = "(e, n, l) => e.removeEventListener(n, l)")
     private static native void _removeEventListener(Object pointer, Object name, Object event);
 
@@ -116,6 +116,10 @@ public abstract class Native {
         return _getDocumentCreateElement(_toString(name));
     }
 
+    protected static Object getElementQuerySelector(Object pointer, String query) {
+        return _getElementQuerySelector(pointer, _toString(query));
+    }
+
     protected static Object getDocumentCreateElement(Object pointer, char name) {
         return _getDocumentCreateElement(pointer, (int) name);
     }
@@ -132,14 +136,14 @@ public abstract class Native {
         _setElementAttribute(pointer, _toString(name), _toString(value));
     }
 
-    @Import(module = "native", name = "getElementParentElement", js = "e => e.parentElement")
-    protected static native Object getElementParentElement(Object pointer);
-
     @Import(module = "native", name = "getElementBody", js = "e => e.body")
     protected static native Object getElementBody(Object pointer);
 
     @Import(module = "native", name = "getElementHead", js = "e => e.head")
     protected static native Object getElementHead(Object pointer);
+
+    @Import(module = "native", name = "getElementParentElement", js = "e => e.parentElement")
+    protected static native Object getElementParentElement(Object pointer);
 
     @Import(module = "native", name = "setElementRemove", js = "e => e.remove()")
     protected static native void setElementRemove(Object pointer);
@@ -179,6 +183,9 @@ public abstract class Native {
 
     @Import(module = "native", name = "getDocumentCreateElement4", js = "(o, n) => o.createElement(n)")
     private static native Object _getDocumentCreateElement(Object pointer, Object name);
+
+    @Import(module = "native", name = "getElementQuerySelector", js = "(e, q) => e.querySelector(q)")
+    private static native Object _getElementQuerySelector(Object pointer, Object query);
 
     // TRADUCAO
 

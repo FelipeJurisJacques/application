@@ -35,12 +35,14 @@ public class EventListener extends Native {
         map.put(type, action);
     }
 
-    public boolean execute(EventType type, Object data) {
-        ActionListener listener = this.map.get(type);
+    public boolean contains(EventType type) {
+        return this.map.has(type);
+    }
+
+    public boolean execute(Event event) {
+        ActionListener listener = this.map.get(event.getType());
         if (listener != null) {
-            Event event = new Event(data, type);
             listener.actionPerformed(event);
-            event.finalize();
             return true;
         }
         return false;

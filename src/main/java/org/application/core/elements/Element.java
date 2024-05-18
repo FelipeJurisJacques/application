@@ -133,7 +133,7 @@ public class Element extends Handler {
 
     public void remove() {
         setElementRemove(pointer);
-        finalize();
+        // finalize();
     }
 
     @Override

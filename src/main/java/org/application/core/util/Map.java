@@ -1,20 +1,21 @@
 package org.application.core.util;
 
-public class Map<K, V> extends Comparator<K> {
+public class Map<K, V> {
+    private K key;
     private V value;
     private Map<K, V> next;
 
     public Map() {
-        super();
+        this.key = null;
         this.next = null;
         this.value = null;
     }
 
     public void put(K key, V value) {
-        if (this.getValue() == null) {
-            this.setValue(key);
+        if (this.key == null) {
+            this.key = key;
             this.value = value;
-        } else if (this.compare(key)) {
+        } else if (new Comparator<K>(this.key).compare(key)) {
             this.value = value;
         } else if (this.next == null) {
             this.next = new Map<K, V>();
@@ -24,11 +25,24 @@ public class Map<K, V> extends Comparator<K> {
         }
     }
 
+    public boolean has(K key) {
+        if (this.key == null) {
+            return false;
+        }
+        if (new Comparator<K>(this.key).compare(key)) {
+            return true;
+        }
+        if (this.next == null) {
+            return false;
+        }
+        return this.next.has(key);
+    }
+
     public V get(K key) {
-        if (this.getValue() == null) {
+        if (this.key == null) {
             return null;
         }
-        if (this.compare(key)) {
+        if (new Comparator<K>(this.key).compare(key)) {
             return this.value;
         }
         if (this.next == null) {
@@ -39,7 +53,9 @@ public class Map<K, V> extends Comparator<K> {
 
     @Override
     public void finalize() {
-        super.finalize();
+        if (this.key == null) {
+            this.key = null;
+        }
         if (this.next != null) {
             this.next.finalize();
             this.next = null;
