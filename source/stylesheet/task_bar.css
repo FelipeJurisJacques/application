@@ -52,19 +52,19 @@ footer.task_bar button.start:active {
     background-image: url(../../source/image/icon/start_button_active.png);
 }
 
-footer.task_bar button.tab {
+footer.task_bar button.task {
     width: 134px;
     height: 30px;
     text-align: left;
-    background-image: url(../../source/image/icon/windows_button_tab.png);
+    background-image: url(../../source/image/icon/windows_button_task.png);
 }
 
-footer.task_bar button.tab:hover {
-    background-image: url(../../source/image/icon/windows_button_tab_hover.png);
+footer.task_bar button.task:hover {
+    background-image: url(../../source/image/icon/windows_button_task_hover.png);
 }
 
-footer.task_bar button.tab.active {
-    background-image: url(../../source/image/icon/windows_button_tab_active.png);
+footer.task_bar button.task.active {
+    background-image: url(../../source/image/icon/windows_button_task_active.png);
 }
 
 footer.task_bar button {

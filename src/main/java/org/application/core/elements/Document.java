@@ -65,9 +65,6 @@ public class Document extends Native {
     }
 
     public Element querySelector(String query) {
-        org.application.core.Console.log(query);
-        org.application.core.Console.log(pointer);
-        org.application.core.Console.log(getElementQuerySelector(pointer, query));
         return Element.getElement(getElementQuerySelector(pointer, query));
     }
 
