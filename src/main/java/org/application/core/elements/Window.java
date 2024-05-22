@@ -4,7 +4,6 @@ import org.application.core.Native;
 import org.application.core.util.List;
 import org.application.core.event.Event;
 import org.application.core.event.EventType;
-import org.application.core.event.ActionListener;
 
 public class Window extends Native {
     protected static Window window = new Window(getWindow());

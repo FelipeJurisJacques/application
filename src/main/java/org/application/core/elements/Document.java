@@ -1,9 +1,15 @@
 package org.application.core.elements;
 
 import org.application.core.Native;
+import org.application.core.elements.html.Div;
 import org.application.core.elements.html.Body;
 import org.application.core.elements.html.Head;
 import org.application.core.elements.html.Link;
+import org.application.core.elements.html.Button;
+import org.application.core.elements.html.Footer;
+import org.application.core.elements.html.Heading;
+import org.application.core.elements.html.Paragraph;
+import org.application.core.elements.html.HeadingSize;
 
 public class Document extends Native {
     protected Window window;
@@ -32,7 +38,7 @@ public class Document extends Native {
     public Element createElement(ElementType type) {
         switch (type) {
             case HTML_DIV:
-                return new Element(this, type);
+                return new Div(this);
             case HTML_HEAD:
                 return new Head(this);
             case HTML_BODY:
@@ -44,17 +50,29 @@ public class Document extends Native {
             case HTML_INPUT:
                 return new Element(this, type);
             case HTML_BUTTON:
-                return new Element(this, type);
+                return new Button(this);
             case HTML_FOOTER:
-                return new Element(this, type);
+                return new Footer(this);
             case HTML_DOCUMENT:
                 return new Element(this, type);
             case HTML_FORMULARY:
                 return new Element(this, type);
+            case HTML_HEADING_1:
+                return new Heading(getInstance(), HeadingSize.VERY_LARGE);
+            case HTML_HEADING_2:
+                return new Heading(getInstance(), HeadingSize.LARGE);
+            case HTML_HEADING_3:
+                return new Heading(getInstance(), HeadingSize.LITTLE_LARGE);
+            case HTML_HEADING_4:
+                return new Heading(getInstance(), HeadingSize.LITTLE_SMALL);
+            case HTML_HEADING_5:
+                return new Heading(getInstance(), HeadingSize.SMALL);
+            case HTML_HEADING_6:
+                return new Heading(getInstance(), HeadingSize.VERY_SMALL);
             case HTML_LIST_ITEM:
                 return new Element(this, type);
             case HTML_PARAGRAPH:
-                return new Element(this, type);
+                return new Paragraph(this);
             case HTML_LINE_BREAK:
                 return new Element(this, type);
             case HTML_UNORDERED_LIST:

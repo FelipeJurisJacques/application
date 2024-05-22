@@ -88,10 +88,10 @@ public abstract class Native {
 
     // WINDOW
 
-    @Import(module = "window", js = "() => { return window }")
+    @Import(module = "native", js = "() => { return window }")
     protected static native Object getWindow();
 
-    @Import(module = "window", js = "w => { return w.document }")
+    @Import(module = "native", js = "w => { return w.document }")
     protected static native Object getWindowDocument(Object pointer);
 
     // ELEMENTS

@@ -17,6 +17,7 @@ public class Window extends Element {
         tool.setClassName("tool_bar");
         append(tool);
         content = new Div(document);
+        content.setClassName("content");
         append(content);
     }
 }

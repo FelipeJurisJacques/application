@@ -12,6 +12,7 @@ C:\Users\felip\workspace\application\src\main\java\org\application\core\event\Ev
 C:\Users\felip\workspace\application\src\main\java\org\application\core\Native.java
 C:\Users\felip\workspace\application\src\main\java\org\application\core\observer\Observer.java
 C:\Users\felip\workspace\application\src\main\java\org\application\core\elements\html\Footer.java
+C:\Users\felip\workspace\application\src\main\java\org\application\core\elements\html\Heading.java
 C:\Users\felip\workspace\application\src\main\java\org\application\core\elements\ElementType.java
 C:\Users\felip\workspace\application\src\main\java\org\application\core\draw\ClipPatch.java
 C:\Users\felip\workspace\application\src\main\java\org\application\core\event\EventListener.java
@@ -31,5 +32,7 @@ C:\Users\felip\workspace\application\src\main\java\org\application\core\elements
 C:\Users\felip\workspace\application\src\main\java\org\application\web\widgets\Window.java
 C:\Users\felip\workspace\application\src\main\java\org\application\core\asynchronous\MessageObserver.java
 C:\Users\felip\workspace\application\src\main\java\org\application\core\util\List.java
+C:\Users\felip\workspace\application\src\main\java\org\application\core\elements\html\Paragraph.java
 C:\Users\felip\workspace\application\src\main\java\org\application\core\Console.java
+C:\Users\felip\workspace\application\src\main\java\org\application\core\elements\html\HeadingSize.java
 C:\Users\felip\workspace\application\src\main\java\org\application\core\elements\Element.java

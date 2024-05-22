@@ -67,6 +67,24 @@ public class Element extends Handler {
             case HTML_FORMULARY:
                 pointer = getDocumentCreateElement(document.pointer, "FORM");
                 break;
+            case HTML_HEADING_1:
+                pointer = getDocumentCreateElement(document.pointer, "H1");
+                break;
+            case HTML_HEADING_2:
+                pointer = getDocumentCreateElement(document.pointer, "H2");
+                break;
+            case HTML_HEADING_3:
+                pointer = getDocumentCreateElement(document.pointer, "H3");
+                break;
+            case HTML_HEADING_4:
+                pointer = getDocumentCreateElement(document.pointer, "H4");
+                break;
+            case HTML_HEADING_5:
+                pointer = getDocumentCreateElement(document.pointer, "H5");
+                break;
+            case HTML_HEADING_6:
+                pointer = getDocumentCreateElement(document.pointer, "H6");
+                break;
             case HTML_LIST_ITEM:
                 pointer = getDocumentCreateElement(document.pointer, "LI");
                 break;
