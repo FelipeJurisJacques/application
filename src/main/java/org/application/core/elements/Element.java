@@ -12,7 +12,7 @@ public class Element extends Handler {
     protected static List<Element> elements = new List<>();
 
     public static Element getElement(Object pointer) {
-        if (elements.size() > 0) {
+        if (pointer != null && elements.size() > 0) {
             Element element;
             for (int i = 0; i < elements.size(); i++) {
                 element = elements.get(i);
@@ -151,7 +151,7 @@ public class Element extends Handler {
 
     public void remove() {
         setElementRemove(pointer);
-        // finalize();
+        finalize();
     }
 
     @Override
@@ -169,7 +169,7 @@ public class Element extends Handler {
                 element = null;
             }
             for (int i = 0; i < elements.size(); i++) {
-                if (equals(elements.get(i))) {
+                if (equals(pointer, elements.get(i).pointer)) {
                     elements.remove(i);
                     break;
                 }

@@ -82,3 +82,9 @@ canvas#skin {
     width: 200px;
     height: 200px;
 }
+
+@media print {
+    body footer {
+        display: none;
+    }
+}

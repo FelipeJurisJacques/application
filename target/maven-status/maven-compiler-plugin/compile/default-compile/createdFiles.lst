@@ -21,7 +21,6 @@ org\application\core\elements\html\Heading$1.class
 org\application\web\widgets\Window.class
 org\application\web\widgets\Menu$2.class
 org\application\web\widgets\TaskBar$1.class
-org\application\core\util\Item.class
 org\application\web\widgets\TaskBar.class
 org\application\core\event\ActionListener.class
 org\application\core\elements\Document$1.class

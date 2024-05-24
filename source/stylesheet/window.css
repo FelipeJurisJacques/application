@@ -72,8 +72,13 @@ div.window div.tool_bar button {
 
 div.window div.content {
     top: 30px;
+    color: black;
     position: absolute;
-    /* background-color: white; */
+    background-color: white;
+}
+
+div.window div.content * {
+    color: black;
 }
 
 div.window.maximized div.content {
@@ -93,4 +98,10 @@ div.window.minimized div.content {
     border-left-color:#0831D9;
     border-right-color:#0831D9;
     border-bottom-color:#0831D9;
+}
+
+@media print {
+    body div.window div.tool_bar {
+        display: none;
+    }
 }

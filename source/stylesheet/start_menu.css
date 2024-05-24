@@ -28,3 +28,9 @@ div.start_menu button.explorer {
     background-image: url(../../source/image/icon/folder.png);
     background-repeat: no-repeat;
 }
+
+@media print {
+    div.start_menu {
+        display: none;
+    }
+}

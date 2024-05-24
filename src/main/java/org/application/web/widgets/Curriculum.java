@@ -3,6 +3,7 @@ package org.application.web.widgets;
 import org.application.core.elements.Element;
 import org.application.core.elements.Document;
 import org.application.core.elements.html.Div;
+import org.application.core.elements.html.Head;
 import org.application.core.elements.html.Heading;
 import org.application.core.elements.html.Paragraph;
 import org.application.core.elements.html.HeadingSize;
@@ -10,6 +11,9 @@ import org.application.core.elements.html.HeadingSize;
 public class Curriculum extends Window {
     public Curriculum(Document document, Element desktop, Element bar) {
         super(document, desktop, bar);
+
+        Head head = document.getHead();
+        head.addStylesheet("./source/stylesheet/curriculum.css");
 
         Div left = new Div(document);
         Heading name = new Heading(document, HeadingSize.VERY_LARGE);
