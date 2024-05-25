@@ -19,7 +19,6 @@ public class Window extends Native {
     public static void eventDispatch(Object data) {
         boolean clicked = false;
         boolean interacted;
-        Event event;
         Element element = Element.getElement(getEventTarget(data));
         List<Element> elements = Element.getElements();
         List<Element> interactions = new List<Element>();
@@ -36,32 +35,23 @@ public class Window extends Native {
                     break;
                 }
             }
-            if (!interacted && element.eventListeners.contains(EventType.WITHOUT_FOCUS)) {
-                event = new Event(data, EventType.WITHOUT_FOCUS, element);
-                if (element.eventListeners.execute(event)) {
-                    element.focus = false;
-                }
-                event.finalize();
-                event = null;
+            if (!interacted && _eventDispatch(element, EventType.WITHOUT_FOCUS, data)) {
+                element.focus = false;
             }
         }
         for (int i = 0; i < interactions.size(); i++) {
             element = interactions.get(i);
-            if (!clicked && element.eventListeners.contains(EventType.CLICK)) {
-                event = new Event(data, EventType.CLICK, element);
-                if (element.eventListeners.execute(event)) {
-                    clicked = true;
+            if (!clicked && _eventDispatch(element, EventType.CLICK, data)) {
+                clicked = true;
+                if (element.pointer == null) {
+                    continue;
                 }
-                event.finalize();
-                event = null;
             }
-            if (!element.focus && element.eventListeners.contains(EventType.FOCUS)) {
-                event = new Event(data, EventType.FOCUS, element);
-                if (element.eventListeners.execute(event)) {
-                    element.focus = true;
+            if (!element.focus && _eventDispatch(element, EventType.FOCUS, data)) {
+                element.focus = true;
+                if (element.pointer == null) {
+                    continue;
                 }
-                event.finalize();
-                event = null;
             }
         }
     }
@@ -94,5 +84,17 @@ public class Window extends Native {
         this.pointer = null;
         this.document = null;
         this.listeners = null;
+    }
+
+    private static boolean _eventDispatch(Element element, EventType type, Object data) {
+        if (element.eventListeners.contains(type)) {
+            Event event = new Event(data, type, element);
+            if (element.eventListeners.execute(event)) {
+                return true;
+            }
+            event.finalize();
+            event = null;
+        }
+        return false;
     }
 }

@@ -50,6 +50,7 @@ public class List<V> {
     @Override
     public void finalize() {
         if (this.next != null) {
+            this.next.finalize();
             this.next = null;
         }
         if (this.value != null) {
