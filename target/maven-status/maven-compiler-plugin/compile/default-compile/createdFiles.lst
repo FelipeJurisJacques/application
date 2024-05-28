@@ -1,5 +1,6 @@
 org\application\core\Console.class
 org\application\web\widgets\Menu$1.class
+org\application\core\database\Connection.class
 org\application\core\elements\html\Link.class
 org\application\core\elements\Window.class
 org\application\core\elements\html\Heading.class
@@ -9,7 +10,9 @@ org\application\core\asynchronous\MessageObserver.class
 org\application\core\elements\Document.class
 org\application\core\Native.class
 org\application\core\util\Comparator.class
+org\application\core\util\List$ListIterator.class
 org\application\core\observer\Subject.class
+org\application\core\util\List$1.class
 org\application\web\views\Desktop.class
 org\application\core\elements\Handler.class
 Application.class

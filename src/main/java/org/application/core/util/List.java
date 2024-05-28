@@ -1,6 +1,9 @@
 package org.application.core.util;
 
-public class List<V> {
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
+public class List<V> implements Iterable<V> {
     private V value;
     private List<V> next;
 
@@ -20,7 +23,7 @@ public class List<V> {
 
     public V get(int index) {
         if (this.next == null) {
-            throw new IllegalArgumentException("index greater than length");
+            throw new IndexOutOfBoundsException("index greater than length");
         }
         if (index == 0) {
             return this.value;
@@ -37,7 +40,7 @@ public class List<V> {
 
     public void remove(int index) {
         if (this.next == null) {
-            throw new IllegalArgumentException("index greater than length");
+            throw new IndexOutOfBoundsException("index greater than length");
         }
         if (index == 0) {
             this.value = this.next.value;
@@ -55,6 +58,28 @@ public class List<V> {
         }
         if (this.value != null) {
             this.value = null;
+        }
+    }
+
+    @Override
+    public Iterator<V> iterator() {
+        return new ListIterator();
+    }
+
+    private class ListIterator implements Iterator<V> {
+        private int index = 0;
+
+        @Override
+        public boolean hasNext() {
+            return index < size();
+        }
+
+        @Override
+        public V next() {
+            if (!hasNext()) {
+                throw new NoSuchElementException();
+            }
+            return get(index);
         }
     }
 }

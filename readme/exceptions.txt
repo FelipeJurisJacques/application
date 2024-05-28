@@ -1,0 +1,38 @@
+Java fornece um conjunto abrangente de exceções nativas que cobrem uma ampla gama de situações. Aqui estão algumas das exceções nativas mais comuns, divididas entre checked e unchecked exceptions:
+
+### Checked Exceptions
+
+1. **IOException**: Usada para operações de entrada/saída que falham ou são interrompidas.
+   - `FileNotFoundException`
+   - `EOFException`
+
+2. **SQLException**: Lançada quando ocorre um erro ao acessar o banco de dados.
+
+3. **ClassNotFoundException**: Lançada quando uma aplicação tenta carregar uma classe através do seu nome, mas não consegue encontrar a classe.
+
+4. **InstantiationException**: Lançada quando uma aplicação tenta instanciar uma classe que não pode ser instanciada.
+
+5. **IllegalAccessException**: Lançada quando uma aplicação tenta refletir uma classe e não tem acesso ao nível desejado de visibilidade.
+
+6. **InterruptedException**: Lançada quando uma thread é interrompida enquanto está esperando, dormindo ou ocupada.
+
+7. **NoSuchMethodException**: Lançada quando um método específico não pode ser encontrado.
+
+8. **NoSuchFieldException**: Lançada quando um campo específico não pode ser encontrado.
+
+### Unchecked Exceptions
+
+1. **RuntimeException**: A classe base para exceções que podem ser lançadas durante a operação normal da máquina virtual Java.
+   - **NullPointerException**: Lançada quando uma aplicação tenta usar `null` no lugar onde um objeto é necessário.
+   - **ArrayIndexOutOfBoundsException**: Lançada para indicar que um índice de um array está fora do intervalo válido.
+   - **ArithmeticException**: Lançada quando ocorre uma condição aritmética excepcional, como divisão por zero.
+   - **IllegalArgumentException**: Lançada para indicar que um método recebeu um argumento inválido.
+   - **IllegalStateException**: Sinaliza que um método foi chamado em um momento ilegal ou inapropriado.
+   - **ClassCastException**: Lançada para indicar que uma aplicação tentou fazer um cast de um objeto para uma subclasse do qual ele não é uma instância.
+   - **IndexOutOfBoundsException**: Lançada para indicar que um índice de alguma sorte (seja string, array, lista ou similar) está fora do intervalo válido.
+   - **UnsupportedOperationException**: Lançada para indicar que a operação solicitada não é suportada.
+
+2. **Error**: Uma subclasse de `Throwable` que indica problemas graves que uma aplicação não deve tentar capturar.
+   - **OutOfMemoryError**: Lançada quando a JVM não consegue alocar memória adicional.
+   - **StackOverflowError**: Lançada quando a pilha da JVM fica sem espaço.
+   - **VirtualMachineError**: Inclui erros que indicam que a JVM está se esgotando ou foi corrompida.

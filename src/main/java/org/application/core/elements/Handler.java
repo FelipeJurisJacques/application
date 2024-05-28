@@ -4,7 +4,6 @@ import org.application.core.Native;
 import org.application.core.event.EventType;
 import org.application.core.event.EventListener;
 import org.application.core.event.ActionListener;
-import org.application.core.event.Event;
 
 class Handler extends Native {
     boolean focus;
