@@ -1,6 +1,8 @@
 package org.application.core;
 
+import org.application.core.util.List;
 import org.application.core.event.EventListener;
+import org.application.core.asynchronous.Promise;
 import org.application.core.asynchronous.Asynchronous;
 import de.inetsoftware.jwebassembly.api.annotation.Export;
 import de.inetsoftware.jwebassembly.api.annotation.Import;
@@ -10,6 +12,84 @@ import de.inetsoftware.jwebassembly.api.annotation.Import;
  * @author felipe
  */
 public abstract class Native {
+    private static List<InnerPromiseNative> _asynchronous;
+
+    // FETCH
+
+    protected static Promise<Object> fetch(String uri) {
+        return _getPromise(_fetch(_toString(uri)));
+    }
+
+    protected static Promise<Object> fetch(String uri, Object options) {
+        return _getPromise(_fetch(_toString(uri), options));
+    }
+
+    @Import(module = "native", name = "fetch1", js = "u => fetch(u)")
+    private static native Object _fetch(Object uri);
+
+    @Import(module = "native", name = "fetch2", js = "(u, o) => fetch(u, o)")
+    private static native Object _fetch(Object uri, Object options);
+
+    // ERROR
+
+    @Import(module = "native", name = "isError", js = "e => e instanceof Error")
+    protected static native boolean isError(Object pointer);
+
+    protected static String getErrorMessage(Object pointer) {
+        return _getString(_getErrorMessage(pointer));
+    }
+
+    @Import(module = "native", name = "getErrorMessage", js = "e => e.message")
+    private static native Object _getErrorMessage(Object pointer);
+
+    // PROMISE
+
+    @Export
+    public static void promiseResolve(Object pointer, Object data) {
+        InnerPromiseNative reference;
+        for (int i = 0; i < _asynchronous.length(); i++) {
+            reference = _asynchronous.get(i);
+            if (equals(reference.pointer, pointer)) {
+                try {
+                    reference.resolve(data);
+                } catch (Throwable error) {
+                    reference.reject(error);
+                }
+                _asynchronous.remove(i);
+            }
+        }
+    }
+
+    @Export
+    public static void promiseReject(Object pointer, Object data) {
+        InnerPromiseNative reference;
+        for (int i = 0; i < _asynchronous.length(); i++) {
+            reference = _asynchronous.get(i);
+            if (equals(reference.pointer, pointer)) {
+                reference.reject(new Exception(getErrorMessage(data)));
+                _asynchronous.remove(i);
+            }
+        }
+    }
+
+    private static class InnerPromiseNative extends Promise<Object> {
+        private Object pointer;
+    }
+
+    private static Promise<Object> _getPromise(Object pointer) {
+        InnerPromiseNative promise = new InnerPromiseNative();
+        promise.pointer = pointer;
+        _setPromiseThen(pointer);
+        _setPromiseCatch(pointer);
+        _asynchronous.push(promise);
+        return promise;
+    }
+
+    @Import(module = "native", name = "setPromiseThen", js = "p => p.then(v => wasmImports.native.promiseResolve(p, v))")
+    private static native void _setPromiseThen(Object promise);
+
+    @Import(module = "native", name = "setPromiseCatch", js = "p => p.catch(e => wasmImports.native.promiseReject(p, e))")
+    private static native void _setPromiseCatch(Object promise);
 
     // EVENTS
 

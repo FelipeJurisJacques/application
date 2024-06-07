@@ -11,6 +11,14 @@ public class List<V> implements Iterable<V> {
         this.next = null;
         this.value = null;
     }
+    
+    public int length() {
+        return size();
+    }
+
+    public void push(V value) {
+        add(value);
+    }
 
     public void add(V value) {
         if (this.next == null) {
