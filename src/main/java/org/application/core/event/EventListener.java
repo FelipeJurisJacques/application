@@ -1,7 +1,7 @@
 package org.application.core.event;
 
-import org.application.core.Native;
 import org.application.core.Console;
+import org.application.core.directrix.Directrix;
 import org.application.core.util.Map;
 import org.application.core.elements.Window;
 
@@ -10,7 +10,7 @@ import org.application.core.elements.Window;
  * 
  * toma acao a partir de qualquer evento recebido pelo js
  */
-public class EventListener extends Native {
+public class EventListener extends Directrix {
     protected Map<EventType, ActionListener> map;
 
     public static void eventDispatch(Object data) {

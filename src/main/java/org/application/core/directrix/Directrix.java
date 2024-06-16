@@ -1,6 +1,7 @@
-package org.application.core;
+package org.application.core.directrix;
 
 import org.application.core.util.List;
+import org.application.core.pool.Reusable;
 import org.application.core.event.EventListener;
 import org.application.core.asynchronous.Promise;
 import org.application.core.asynchronous.Asynchronous;
@@ -8,39 +9,19 @@ import de.inetsoftware.jwebassembly.api.annotation.Export;
 import de.inetsoftware.jwebassembly.api.annotation.Import;
 
 /**
- *
  * @author felipe
  */
-public abstract class Native {
+public abstract class Directrix extends Reusable {
     private static List<InnerPromiseNative> _asynchronous;
 
-    // FETCH
+    private static class InnerPromiseNative extends Promise<Object> {
+        private Object pointer;
 
-    protected static Promise<Object> fetch(String uri) {
-        return _getPromise(_fetch(_toString(uri)));
+        public InnerPromiseNative() {
+            super();
+            pointer = null;
+        }
     }
-
-    protected static Promise<Object> fetch(String uri, Object options) {
-        return _getPromise(_fetch(_toString(uri), options));
-    }
-
-    @Import(module = "native", name = "fetch1", js = "u => fetch(u)")
-    private static native Object _fetch(Object uri);
-
-    @Import(module = "native", name = "fetch2", js = "(u, o) => fetch(u, o)")
-    private static native Object _fetch(Object uri, Object options);
-
-    // ERROR
-
-    @Import(module = "native", name = "isError", js = "e => e instanceof Error")
-    protected static native boolean isError(Object pointer);
-
-    protected static String getErrorMessage(Object pointer) {
-        return _getString(_getErrorMessage(pointer));
-    }
-
-    @Import(module = "native", name = "getErrorMessage", js = "e => e.message")
-    private static native Object _getErrorMessage(Object pointer);
 
     // PROMISE
 
@@ -56,6 +37,7 @@ public abstract class Native {
                     reference.reject(error);
                 }
                 _asynchronous.remove(i);
+                break;
             }
         }
     }
@@ -66,22 +48,22 @@ public abstract class Native {
         for (int i = 0; i < _asynchronous.length(); i++) {
             reference = _asynchronous.get(i);
             if (equals(reference.pointer, pointer)) {
-                reference.reject(new Exception(getErrorMessage(data)));
+                Property obj = Property.acquire(data);
+                String message = obj.get("message").asString();
+                reference.reject(new Exception(message));
                 _asynchronous.remove(i);
+                break;
             }
         }
-    }
-
-    private static class InnerPromiseNative extends Promise<Object> {
-        private Object pointer;
     }
 
     private static Promise<Object> _getPromise(Object pointer) {
         InnerPromiseNative promise = new InnerPromiseNative();
         promise.pointer = pointer;
-        _setPromiseThen(pointer);
-        _setPromiseCatch(pointer);
-        _asynchronous.push(promise);
+        setConsoleLog(pointer);
+        // _setPromiseThen(pointer);
+        // _setPromiseCatch(pointer);
+        // _asynchronous.push(promise);
         return promise;
     }
 
@@ -104,15 +86,15 @@ public abstract class Native {
     }
 
     protected static String getEventType(Object pointer) {
-        return _getString(_getEventType(pointer));
+        return getString(_getEventType(pointer));
     }
 
     protected static void addEventListener(Object pointer, String name, Object event) {
-        _addEventListener(pointer, _toString(name), event);
+        _addEventListener(pointer, toString(name), event);
     }
 
     protected static void removeEventListener(Object pointer, String name, Object event) {
-        _removeEventListener(pointer, _toString(name), event);
+        _removeEventListener(pointer, toString(name), event);
     }
 
     @Import(module = "native", name = "getDefaultEventHandling", js = "() => e => wasmImports.native.eventDispatch(e)")
@@ -132,39 +114,11 @@ public abstract class Native {
 
     // CONSOLE LOG
 
-    protected static void setConsoleLogChar(char value) {
-        _setConsoleLogChar((int) value);
-    }
+    @Import(module = "native", name = "setConsoleLog", js = "v => console.log(v)")
+    protected static native void setConsoleLog(Object value);
 
-    protected static void setConsoleLogBoolean(boolean value) {
-        _setConsoleLogBoolean(value ? 1 : 0);
-    }
-
-    protected static void setConsoleLogString(String value) {
-        _setConsoleLogString(_toString(value));
-    }
-
-    protected static void setConsoleErrorString(String value) {
-        _setConsoleErrorString(_toString(value));
-    }
-
-    @Import(module = "native", name = "setConsoleLogInteger", js = "v => console.log(v)")
-    protected static native void setConsoleLogInteger(int value);
-
-    @Import(module = "native", name = "setConsoleLogObject", js = "v => console.log(v)")
-    protected static native void setConsoleLogObject(Object value);
-
-    @Import(module = "native", name = "setConsoleLogBoolean", js = "v => console.log(v == 1)")
-    protected static native void _setConsoleLogBoolean(int value);
-
-    @Import(module = "native", name = "setConsoleLogString", js = "v => console.log(v)")
-    private static native void _setConsoleLogString(Object value);
-
-    @Import(module = "native", name = "setConsoleLogChar", js = "v => console.log(String.fromCharCode(v))")
-    private static native void _setConsoleLogChar(int value);
-
-    @Import(module = "native", name = "setConsoleErrorString", js = "v => console.error(v)")
-    protected static native void _setConsoleErrorString(Object value);
+    @Import(module = "native", name = "setConsoleError", js = "v => console.error(v)")
+    protected static native void setConsoleError(Object value);
 
     // WINDOW
 
@@ -177,15 +131,15 @@ public abstract class Native {
     // ELEMENTS
 
     protected static String getElementTagName(Object pointer) {
-        return _getString(_getElementTagName(pointer));
+        return getString(_getElementTagName(pointer));
     }
 
     protected static String getElementInnerText(Object pointer) {
-        return _getString(_getElementInnerText(pointer));
+        return getString(_getElementInnerText(pointer));
     }
 
     protected static void setElementInnerText(Object pointer, String value) {
-        _setElementInnerText(pointer, _toString(value));
+        _setElementInnerText(pointer, toString(value));
     }
 
     protected static Object getDocumentCreateElement(char name) {
@@ -193,11 +147,11 @@ public abstract class Native {
     }
 
     protected static Object getDocumentCreateElement(String name) {
-        return _getDocumentCreateElement(_toString(name));
+        return _getDocumentCreateElement(toString(name));
     }
 
     protected static Object getElementQuerySelector(Object pointer, String query) {
-        return _getElementQuerySelector(pointer, _toString(query));
+        return _getElementQuerySelector(pointer, toString(query));
     }
 
     protected static Object getDocumentCreateElement(Object pointer, char name) {
@@ -205,15 +159,15 @@ public abstract class Native {
     }
 
     protected static Object getDocumentCreateElement(Object pointer, String name) {
-        return _getDocumentCreateElement(pointer, _toString(name));
+        return _getDocumentCreateElement(pointer, toString(name));
     }
 
     protected static String getElementAttribute(Object pointer, String name) {
-        return _getString(_getElementAttribute(pointer, _toString(name)));
+        return getString(_getElementAttribute(pointer, toString(name)));
     }
 
     protected static void setElementAttribute(Object pointer, String name, String value) {
-        _setElementAttribute(pointer, _toString(name), _toString(value));
+        _setElementAttribute(pointer, toString(name), toString(value));
     }
 
     @Import(module = "native", name = "getElementBody", js = "e => e.body")
@@ -269,25 +223,71 @@ public abstract class Native {
 
     // TRADUCAO
 
+    protected static Object newObject(String value) {
+        return toString(value);
+    }
+
+    protected static Object newObject(char value) {
+        return toString(value);
+    }
+
+    @Import(module = "native", name = "newObject", js = "() => {}")
+    static native Object newObject();
+
+    @Import(module = "native", name = "newObject1", js = "i => i")
+    protected static native Object newObject(int value);
+
+    @Import(module = "native", name = "newObject2", js = "b => b === 1")
+    protected static native Object newObject(boolean value);
+
+    @Import(module = "native", name = "newObject3", js = "d => d")
+    protected static native Object newObject(double value);
+
+    @Import(module = "native", name = "isUndefined", js = "p => p === undefined")
+    protected static native boolean isUndefined(Object pointer);
+
+    @Import(module = "native", name = "callObject", js = "p => p()")
+    static native Object callObject(Object pointer);
+
+    @Import(module = "native", name = "callObject1", js = "(p, v) => p(v)")
+    static native Object callObject(Object pointer, Object parameter);
+
+    @Import(module = "native", name = "callObject2", js = "(p, v1, v2) => p(v1, v2)")
+    static native Object callObject(Object pointer, Object parameter1, Object parameter2);
+
+    @Import(module = "native", name = "getObjectProperty", js = "(o, k) => o[k]")
+    static native Object getObjectProperty(Object pointer, Object key);
+
+    @Import(module = "native", name = "setObjectProperty", js = "(o, k, v) => o[k] = v")
+    static native void setObjectProperty(Object pointer, Object key, Object value);
+
     @Import(module = "native", name = "equals", js = "(o, p) => o === p")
     protected static native boolean equals(Object pointer1, Object pointer2);
 
-    private static Object _toString(String value) {
+    static Object toString(String value) {
         int[] result = new int[value.length()];
         for (int i = 0; i < value.length(); i++) {
             result[i] = (int) value.charAt(i);
         }
-        return _setString(result);
+        return _getString(result);
     }
 
-    private static String _getString(Object pointer) {
-        int length = _getStringLength(pointer);
-        if (length > 0) {
-            String result = "";
-            for (int i = 0; i < length; i++) {
-                result += (char) _getChar(pointer, i);
+    static Object toString(char value) {
+        int[] result = new int[1];
+        result[0] = value;
+        return _getString(result);
+    }
+
+    static String getString(Object pointer) {
+        if (pointer != null) {
+            int length = _getStringLength(pointer);
+            if (length > 0) {
+                String result = "";
+                for (int i = 0; i < length; i++) {
+                    result += (char) _getChar(pointer, i);
+                }
+                return result;
             }
-            return result;
         }
         return "";
     }
@@ -295,9 +295,9 @@ public abstract class Native {
     @Import(module = "native", name = "getChar", js = "(s, i) => s.charCodeAt(i)")
     private static native int _getChar(Object pointer, int index);
 
-    @Import(module = "native", name = "getStringLength", js = "s => s.length")
+    @Import(module = "native", name = "_getStringLength", js = "s => s.length")
     private static native int _getStringLength(Object pointer);
 
     @Import(module = "native", name = "setString", js = "v => { const l = []; for (let a of v[2]) { l.push(String.fromCharCode(a)); } return l.join(''); }")
-    private static native Object _setString(int[] value);
+    private static native Object _getString(int[] value);
 }

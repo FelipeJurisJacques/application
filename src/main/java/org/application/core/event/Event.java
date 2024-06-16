@@ -1,9 +1,9 @@
 package org.application.core.event;
 
-import org.application.core.Native;
+import org.application.core.directrix.Directrix;
 import org.application.core.elements.Element;
 
-public class Event extends Native {
+public class Event extends Directrix {
     protected Object pointer;
     protected EventType type;
     protected Element element;

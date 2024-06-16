@@ -1,9 +1,9 @@
 package org.application.core.database;
 
-import org.application.core.Native;
+import org.application.core.directrix.Directrix;
 import org.application.core.util.List;
 
-public class Connection extends Native {
+public class Connection extends Directrix {
     // protected static List<Connection> connections = new List<>();
     protected String storage;
 

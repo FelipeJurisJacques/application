@@ -1,24 +1,29 @@
 package org.application.core.asynchronous;
 
-public class Promise<V> {
+import org.application.core.pool.Reusable;
+
+public class Promise<V> extends Reusable {
     protected V value;
     protected Throwable error;
-    protected boolean disposed;
     protected boolean finished;
     protected ActionCatch rejected;
     protected ActionThen<V> resolved;
 
     public Promise() {
+        reset();
+    }
+    
+    public void reset(){
+        super.reset();
         this.error = null;
         this.value = null;
         this.rejected = null;
         this.resolved = null;
-        this.disposed = false;
         this.finished = false;
     }
 
     public V await() throws Throwable {
-        if (this.disposed) {
+        if (isDisposed()) {
             throw new IllegalStateException("Promise finished");
         }
         while (!this.finished) {
@@ -36,7 +41,7 @@ public class Promise<V> {
     }
 
     public void setThen(ActionThen<V> resolved) {
-        if (this.disposed) {
+        if (isDisposed()) {
             throw new IllegalStateException("Promise finished");
         }
         this.resolved = resolved;
@@ -46,7 +51,7 @@ public class Promise<V> {
     }
 
     public void setCatch(ActionCatch rejected) {
-        if (this.disposed) {
+        if (isDisposed()) {
             throw new IllegalStateException("Promise finished");
         }
         this.rejected = rejected;
@@ -58,14 +63,13 @@ public class Promise<V> {
     public void dispose() {
         this.value = null;
         this.error = null;
-        this.disposed = true;
         this.finished = true;
         this.rejected = null;
         this.resolved = null;
     }
 
     public void resolve(V value) {
-        if (!this.disposed) {
+        if (!isDisposed()) {
             if (this.resolved == null) {
                 this.value = value;
             } else {
@@ -80,7 +84,7 @@ public class Promise<V> {
     }
 
     public void reject(Throwable error) {
-        if (!this.disposed) {
+        if (!isDisposed()) {
             if (this.rejected == null) {
                 this.error = error;
             } else {

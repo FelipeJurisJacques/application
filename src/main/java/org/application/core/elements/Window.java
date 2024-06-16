@@ -1,11 +1,11 @@
 package org.application.core.elements;
 
-import org.application.core.Native;
 import org.application.core.util.List;
+import org.application.core.directrix.Directrix;
 import org.application.core.event.Event;
 import org.application.core.event.EventType;
 
-public class Window extends Native {
+public class Window extends Directrix {
     protected static Window window = new Window(getWindow());
     protected Object handler;
     protected Object pointer;

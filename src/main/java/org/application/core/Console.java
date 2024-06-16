@@ -1,36 +1,38 @@
 package org.application.core;
 
+import org.application.core.directrix.Directrix;
+
 /**
  *
  * @author felipe
  */
-public class Console extends Native {
+public class Console extends Directrix {
 
     public static void log(char value) {
-        setConsoleLogChar(value);
+        log(newObject(value));
     }
 
     public static void log(int value) {
-        setConsoleLogInteger(value);
+        log(newObject(value));
     }
 
     public static void log(Object value) {
-        setConsoleLogObject(value);
+        setConsoleLog(value);
     }
 
     public static void log(boolean value) {
-        setConsoleLogBoolean(value);
+        log(newObject(value));
     }
 
     public static void log(String value) {
-        setConsoleLogString(value);
+        log(newObject(value));
     }
 
     public static void error(String value) {
-        setConsoleErrorString(value);
+        setConsoleError(newObject(value));
     }
 
     public static void error(Throwable value) {
-        setConsoleErrorString(value.getMessage());
+        error(value.getMessage());
     }
 }

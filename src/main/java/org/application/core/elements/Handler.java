@@ -1,11 +1,11 @@
 package org.application.core.elements;
 
-import org.application.core.Native;
 import org.application.core.event.EventType;
 import org.application.core.event.EventListener;
+import org.application.core.directrix.Directrix;
 import org.application.core.event.ActionListener;
 
-class Handler extends Native {
+class Handler extends Directrix {
     boolean focus;
     EventListener eventListeners;
 

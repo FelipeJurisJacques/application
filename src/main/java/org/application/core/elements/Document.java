@@ -1,7 +1,7 @@
 package org.application.core.elements;
 
-import org.application.core.Native;
 import org.application.core.elements.html.Div;
+import org.application.core.directrix.Directrix;
 import org.application.core.elements.html.Body;
 import org.application.core.elements.html.Head;
 import org.application.core.elements.html.Link;
@@ -11,7 +11,7 @@ import org.application.core.elements.html.Heading;
 import org.application.core.elements.html.Paragraph;
 import org.application.core.elements.html.HeadingSize;
 
-public class Document extends Native {
+public class Document extends Directrix {
     protected Window window;
     protected Object pointer;
 

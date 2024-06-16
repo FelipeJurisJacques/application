@@ -1,11 +1,12 @@
 package org.application.core.http;
 
-import org.application.core.Native;
+import org.application.core.directrix.Directrix;
+import org.application.core.directrix.Property;
 import org.application.core.asynchronous.Promise;
-import org.application.core.asynchronous.ActionCatch;
 import org.application.core.asynchronous.ActionThen;
+import org.application.core.asynchronous.ActionCatch;
 
-public class Client extends Native {
+public class Client extends Directrix {
     protected URI uri;
     protected boolean errors;
 
@@ -25,8 +26,13 @@ public class Client extends Native {
     public Promise<Response> request(Request request) {
         Promise<Response> promise = new Promise<Response>();
         try {
+            Property window = Property.acquire(getWindow());
+            Property fetch = window.get("fetch");
+            fetch.call(Property.acquire("www.google.com"));
+            window.dispose();
+            
             // Promise<Object> fetch = fetch(request.getUri().toString());
-            Promise<Object> fetch = fetch("www.google.com");
+            // Promise<Object> fetch = fetch("www.google.com");
             // fetch.setThen(new ActionThen<Object>() {
             //     @Override
             //     public void actionPerformed(Object value) {
