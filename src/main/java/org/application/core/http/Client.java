@@ -26,10 +26,8 @@ public class Client extends Directrix {
     public Promise<Response> request(Request request) {
         Promise<Response> promise = new Promise<Response>();
         try {
-            Property window = Property.acquire(getWindow());
-            Property fetch = window.get("fetch");
-            fetch.call(Property.acquire("www.google.com"));
-            window.dispose();
+            Property fetch = Property.from("fetch");
+            fetch.call("www.google.com");
             
             // Promise<Object> fetch = fetch(request.getUri().toString());
             // Promise<Object> fetch = fetch("www.google.com");

@@ -1,52 +1,45 @@
 package org.application.core.directrix;
 
-import org.application.core.pool.Pool;
-
 public class Property extends Directrix {
-    private static Pool<Property> pool = new Pool<>();
     private Object pointer;
 
-    public static Property acquire() {
-        Property property = pool.acquire();
-        if (property == null) {
-            property = new Property();
+    public static Property from(String value) {
+        Object pointer = eval(value);
+        if (isUndefined(pointer)) {
+            return null;
         }
-        property.pointer = newObject();
-        return property;
+        return new Property(pointer);
     }
 
-    public static Property acquire(Object pointer) {
-        setConsoleLog(pointer);
-        Property property = pool.acquire();
-        if (property == null) {
-            property = new Property();
-        }
-        property.pointer = pointer;
-        return property;
+    public Property() {
+        pointer = newObject();
     }
 
-    public static Property acquire(int value) {
-        return acquire(newObject(value));
+    public Property(Object pointer) {
+        this.pointer = pointer;
     }
 
-    public static Property acquire(char value) {
-        return acquire(newObject(value));
+    public Property(int value) {
+        pointer = newObject(value);
     }
 
-    public static Property acquire(boolean value) {
-        return acquire(newObject(value));
+    public Property(char value) {
+        pointer = newObject(value);
     }
 
-    public static Property acquire(double value) {
-        return acquire(newObject(value));
+    public Property(boolean value) {
+        pointer = newObject(value);
     }
 
-    public static Property acquire(String value) {
-        return acquire(newObject(value));
+    public Property(double value) {
+        pointer = newObject(value);
+    }
+
+    public Property(String value) {
+        pointer = newObject(value);
     }
 
     public String asString() {
-        _verify();
         String value = getString(pointer);
         dispose();
         return value;
@@ -57,67 +50,58 @@ public class Property extends Directrix {
     }
 
     public Property get(char key) {
-        _verify();
-        return acquire(getObjectProperty(pointer, newObject(key)));
+        return new Property(getObjectProperty(pointer, newObject(key)));
     }
 
     public Property get(String key) {
-        _verify();
-        return acquire(getObjectProperty(pointer, newObject(key)));
+        return new Property(getObjectProperty(pointer, newObject(key)));
     }
 
     public Property put(String key, Property property) {
-        _verify();
-        return acquire(getObjectProperty(pointer, newObject(key)));
+        return new Property(getObjectProperty(pointer, newObject(key)));
     }
 
     public void put(char key, Property property) {
-        _verify();
         setObjectProperty(pointer, newObject(key), property.pointer);
         property.dispose();
     }
 
     public Property call() {
-        _verify();
         Object result = callObject(pointer);
         if (isUndefined(result)) {
             return null;
         }
-        return acquire(result);
+        return new Property(result);
     }
 
     public Property call(Property parameter) {
-        _verify();
         Object result = callObject(pointer, parameter.pointer);
         parameter.dispose();
         if (isUndefined(result)) {
             return null;
         }
-        return acquire(result);
+        return new Property(result);
+    }
+
+    public Property call(String parameter) {
+        Object result = callObject(pointer, newObject(parameter));
+        if (isUndefined(result)) {
+            return null;
+        }
+        return new Property(result);
     }
 
     public Property call(Property parameter1, Property parameter2) {
-        _verify();
         Object result = callObject(pointer, parameter1.pointer, parameter2.pointer);
         parameter1.dispose();
         parameter2.dispose();
         if (isUndefined(result)) {
             return null;
         }
-        return acquire(result);
+        return new Property(result);
     }
 
     public void dispose() {
-        if (!isDisposed()) {
-            super.dispose();
-            pointer = null;
-            pool.release(this);
-        }
-    }
-
-    private void _verify() {
-        if (isDisposed()) {
-            throw new IllegalStateException("property finalized");
-        }
+        pointer = null;
     }
 }

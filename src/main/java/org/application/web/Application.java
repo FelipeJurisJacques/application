@@ -3,8 +3,8 @@ import org.application.core.http.Client;
 import org.application.core.http.Request;
 import org.application.web.views.Desktop;
 import org.application.core.http.Response;
-import org.application.core.asynchronous.Promise;
 import org.application.core.directrix.Property;
+import org.application.core.asynchronous.Promise;
 import org.application.core.asynchronous.ActionThen;
 import de.inetsoftware.jwebassembly.api.annotation.Export;
 
@@ -16,9 +16,9 @@ public class Application {
     @Export
     public static void main() {
         try {
-            // Desktop desktop = new Desktop();
-            Client client = new Client();
-            Promise<Response> promise = client.request("http://www.google.com.br");
+            Desktop desktop = new Desktop();
+            // Client client = new Client();
+            // Promise<Response> promise = client.request("http://www.google.com.br");
             // promise.setThen(new ActionThen<Response>() {
             //     @Override
             //     public void actionPerformed(Response value) {

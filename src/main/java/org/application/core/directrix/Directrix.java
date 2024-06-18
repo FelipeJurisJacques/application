@@ -11,7 +11,7 @@ import de.inetsoftware.jwebassembly.api.annotation.Import;
 /**
  * @author felipe
  */
-public abstract class Directrix extends Reusable {
+public abstract class Directrix {
     private static List<InnerPromiseNative> _asynchronous;
 
     private static class InnerPromiseNative extends Promise<Object> {
@@ -48,7 +48,7 @@ public abstract class Directrix extends Reusable {
         for (int i = 0; i < _asynchronous.length(); i++) {
             reference = _asynchronous.get(i);
             if (equals(reference.pointer, pointer)) {
-                Property obj = Property.acquire(data);
+                Property obj = new Property(data);
                 String message = obj.get("message").asString();
                 reference.reject(new Exception(message));
                 _asynchronous.remove(i);
@@ -223,6 +223,10 @@ public abstract class Directrix extends Reusable {
 
     // TRADUCAO
 
+    protected static Object eval(String value) {
+        return _eval(newObject(value));
+    }
+
     protected static Object newObject(String value) {
         return toString(value);
     }
@@ -300,4 +304,7 @@ public abstract class Directrix extends Reusable {
 
     @Import(module = "native", name = "setString", js = "v => { const l = []; for (let a of v[2]) { l.push(String.fromCharCode(a)); } return l.join(''); }")
     private static native Object _getString(int[] value);
+
+    @Import(module = "native", name = "eval", js = "v => eval(v)")
+    private static native Object _eval(Object value);
 }

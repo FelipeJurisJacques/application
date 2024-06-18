@@ -3,7 +3,6 @@ package org.application.core;
 import org.application.core.directrix.Directrix;
 
 /**
- *
  * @author felipe
  */
 public class Console extends Directrix {
