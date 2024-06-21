@@ -52,6 +52,7 @@ org\application\core\event\Event.class
 org\application\core\event\EventListener.class
 org\application\core\directrix\Property.class
 org\application\core\http\Methods.class
+org\application\core\http\Client$1.class
 org\application\core\asynchronous\Resolve.class
 org\application\core\draw\ClipPatch.class
 org\application\core\elements\ElementType.class

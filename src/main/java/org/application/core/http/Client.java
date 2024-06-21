@@ -1,11 +1,15 @@
 package org.application.core.http;
 
-import org.application.core.directrix.Directrix;
+import org.application.core.Console;
 import org.application.core.directrix.Property;
+import org.application.core.directrix.Directrix;
 import org.application.core.asynchronous.Promise;
 import org.application.core.asynchronous.ActionThen;
 import org.application.core.asynchronous.ActionCatch;
 
+/**
+ * @see desenvolvendo
+ */
 public class Client extends Directrix {
     protected URI uri;
     protected boolean errors;
@@ -24,10 +28,17 @@ public class Client extends Directrix {
     }
 
     public Promise<Response> request(Request request) {
-        Promise<Response> promise = new Promise<Response>();
+        Promise<Response> result = new Promise<Response>();
         try {
-            Property fetch = Property.from("fetch");
-            fetch.call("www.google.com");
+            Property function = Property.global("fetch");
+            Property fetch = function.call("www.google.com");
+            Promise<Property> promise = fetch.asPromise();
+            promise.setThen(new ActionThen<Property>() {
+                @Override
+                public void actionPerformed(Property value) {
+                    Console.log(value);
+                }
+            });
             
             // Promise<Object> fetch = fetch(request.getUri().toString());
             // Promise<Object> fetch = fetch("www.google.com");
@@ -44,9 +55,9 @@ public class Client extends Directrix {
             //     }
             // });
         } catch (Throwable error) {
-            promise.reject(error);
+            result.reject(error);
         }
-        return promise;
+        return result;
     }
 
     public Promise<Response> request(String url) {

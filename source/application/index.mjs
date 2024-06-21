@@ -7,6 +7,14 @@ WebAssembly.instantiateStreaming(fetch(new URL(
             wasmImports.native[i] = result.instance.exports[i]
         }
     }
+    wasmImports.native.promise = promise => {
+        promise.then(value => {
+            result.instance.exports.promiseResolve(promise, value)
+        })
+        promise.catch(error => {
+            result.instance.exports.promiseReject(promise, error)
+        })
+    }
     result.instance.exports.main()
 }).catch(error => {
     console.error(error)

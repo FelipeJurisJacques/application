@@ -1,7 +1,6 @@
 package org.application.core.directrix;
 
 import org.application.core.util.List;
-import org.application.core.pool.Reusable;
 import org.application.core.event.EventListener;
 import org.application.core.asynchronous.Promise;
 import org.application.core.asynchronous.Asynchronous;
@@ -12,9 +11,11 @@ import de.inetsoftware.jwebassembly.api.annotation.Import;
  * @author felipe
  */
 public abstract class Directrix {
-    private static List<InnerPromiseNative> _asynchronous;
+    // PROMISE
 
-    private static class InnerPromiseNative extends Promise<Object> {
+    private static List<InnerPromiseNative> _asynchronous = new List<>();
+
+    private static class InnerPromiseNative extends Promise<Property> {
         private Object pointer;
 
         public InnerPromiseNative() {
@@ -23,8 +24,6 @@ public abstract class Directrix {
         }
     }
 
-    // PROMISE
-
     @Export
     public static void promiseResolve(Object pointer, Object data) {
         InnerPromiseNative reference;
@@ -32,7 +31,7 @@ public abstract class Directrix {
             reference = _asynchronous.get(i);
             if (equals(reference.pointer, pointer)) {
                 try {
-                    reference.resolve(data);
+                    reference.resolve(new Property(data));
                 } catch (Throwable error) {
                     reference.reject(error);
                 }
@@ -48,30 +47,20 @@ public abstract class Directrix {
         for (int i = 0; i < _asynchronous.length(); i++) {
             reference = _asynchronous.get(i);
             if (equals(reference.pointer, pointer)) {
-                Property obj = new Property(data);
-                String message = obj.get("message").asString();
-                reference.reject(new Exception(message));
+                reference.reject(new Exception(getString(getObjectProperty(data, newObject("message")))));
                 _asynchronous.remove(i);
                 break;
             }
         }
     }
 
-    private static Promise<Object> _getPromise(Object pointer) {
+    protected static Promise<Property> getPromise(Object pointer) {
         InnerPromiseNative promise = new InnerPromiseNative();
         promise.pointer = pointer;
-        setConsoleLog(pointer);
-        // _setPromiseThen(pointer);
-        // _setPromiseCatch(pointer);
-        // _asynchronous.push(promise);
+        _asynchronous.add(promise);
+        callObject(eval("wasmImports.native.promise"), pointer);
         return promise;
     }
-
-    @Import(module = "native", name = "setPromiseThen", js = "p => p.then(v => wasmImports.native.promiseResolve(p, v))")
-    private static native void _setPromiseThen(Object promise);
-
-    @Import(module = "native", name = "setPromiseCatch", js = "p => p.catch(e => wasmImports.native.promiseReject(p, e))")
-    private static native void _setPromiseCatch(Object promise);
 
     // EVENTS
 
@@ -117,8 +106,8 @@ public abstract class Directrix {
     @Import(module = "native", name = "setConsoleLog", js = "v => console.log(v)")
     protected static native void setConsoleLog(Object value);
 
-    @Import(module = "native", name = "setConsoleError", js = "v => console.error(v)")
-    protected static native void setConsoleError(Object value);
+    @Import(module = "native", name = "setConsoleError", js = "(v, t) => console.error(v, t)")
+    protected static native void setConsoleError(Object value, Object trace);
 
     // WINDOW
 
@@ -225,6 +214,10 @@ public abstract class Directrix {
 
     protected static Object eval(String value) {
         return _eval(newObject(value));
+    }
+
+    protected static Object global(String value) {
+        return getObjectProperty(getWindow(), newObject(value));
     }
 
     protected static Object newObject(String value) {

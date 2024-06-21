@@ -28,7 +28,17 @@ public class Console extends Directrix {
     }
 
     public static void error(String value) {
-        setConsoleError(newObject(value));
+        try {
+            throw new Exception(value);
+        } catch (Throwable error) {
+            String origin = "";
+            StackTraceElement[] traces = error.getStackTrace();
+            for (int i = 0; i < traces.length; i++) {
+                StackTraceElement trace = traces[i];
+                origin = trace.getFileName();
+            }
+            setConsoleError(newObject(value), newObject(origin));
+        }
     }
 
     public static void error(Throwable value) {

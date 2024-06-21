@@ -1,10 +1,16 @@
 package org.application.core.directrix;
 
+import org.application.core.Console;
+import org.application.core.asynchronous.Promise;
+
+/**
+ * PROPRIEDADE JAVA SCRIPT
+ */
 public class Property extends Directrix {
     private Object pointer;
 
-    public static Property from(String value) {
-        Object pointer = eval(value);
+    public static Property global(String value) {
+        Object pointer = Directrix.global(value);
         if (isUndefined(pointer)) {
             return null;
         }
@@ -45,8 +51,18 @@ public class Property extends Directrix {
         return value;
     }
 
+    public Promise<Property> asPromise() {
+        Promise<Property> promise = getPromise(pointer);
+        dispose();
+        return promise;
+    }
+
     public boolean isNull() {
         return pointer == null;
+    }
+
+    public Property test() {
+        return new Property(getObjectProperty(this, newObject("location")));
     }
 
     public Property get(char key) {
@@ -94,6 +110,15 @@ public class Property extends Directrix {
     public Property call(Property parameter1, Property parameter2) {
         Object result = callObject(pointer, parameter1.pointer, parameter2.pointer);
         parameter1.dispose();
+        parameter2.dispose();
+        if (isUndefined(result)) {
+            return null;
+        }
+        return new Property(result);
+    }
+
+    public Property call(String parameter1, Property parameter2) {
+        Object result = callObject(pointer, newObject(parameter1), parameter2.pointer);
         parameter2.dispose();
         if (isUndefined(result)) {
             return null;
