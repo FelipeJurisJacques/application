@@ -2,6 +2,7 @@ org\application\core\http\Client.class
 org\application\core\elements\html\Link.class
 org\application\core\elements\Window.class
 org\application\core\asynchronous\MessageObserver.class
+org\application\core\Location.class
 org\application\core\http\Response.class
 org\application\web\views\Desktop.class
 org\application\core\elements\Handler.class
@@ -15,6 +16,7 @@ org\application\core\directrix\Directrix.class
 org\application\core\event\ActionListener.class
 org\application\core\pool\Pool$Factory.class
 org\application\core\util\List.class
+org\application\web\views\Curriculum.class
 org\application\core\draw\Vector2.class
 org\application\core\elements\html\Footer.class
 org\application\core\directrix\Directrix$InnerPromiseNative.class

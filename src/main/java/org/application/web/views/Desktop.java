@@ -11,13 +11,13 @@ public class Desktop {
         protected TaskBar bar;
         protected Document document;
 
-        public Desktop() {
-                document = Document.getInstance();
+        public Desktop(Document document) {
+                this.document = document;
                 Head head = document.getHead();
-                head.addStylesheet("./source/stylesheet/index.css");
-                head.addStylesheet("./source/stylesheet/window.css");
-                head.addStylesheet("./source/stylesheet/task_bar.css");
-                head.addStylesheet("./source/stylesheet/start_menu.css");
+                head.addStylesheet("/source/stylesheet/index.css");
+                head.addStylesheet("/source/stylesheet/window.css");
+                head.addStylesheet("/source/stylesheet/task_bar.css");
+                head.addStylesheet("/source/stylesheet/start_menu.css");
 
                 Element body = document.getBody();
 

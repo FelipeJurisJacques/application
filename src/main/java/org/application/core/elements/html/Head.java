@@ -16,4 +16,11 @@ public class Head extends Element {
         element.setHref(path);
         append(element);
     }
+
+    public void addManifest(String path) {
+        Link element = new Link(document);
+        element.setRel("manifest");
+        element.setHref(path);
+        append(element);
+    }
 }

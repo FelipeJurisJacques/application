@@ -61,10 +61,6 @@ public class Property extends Directrix {
         return pointer == null;
     }
 
-    public Property test() {
-        return new Property(getObjectProperty(this, newObject("location")));
-    }
-
     public Property get(char key) {
         return new Property(getObjectProperty(pointer, newObject(key)));
     }

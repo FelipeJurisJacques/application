@@ -105,6 +105,10 @@ public class Element extends Handler {
         elements.add(this);
     }
 
+    public Document getDocument() {
+        return document;
+    }
+
     public String getAttribute(String name) {
         return getElementAttribute(pointer, name);
     }

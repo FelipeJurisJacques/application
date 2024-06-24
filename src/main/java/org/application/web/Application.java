@@ -1,23 +1,28 @@
 import org.application.core.Console;
-import org.application.core.http.Client;
-import org.application.core.http.Request;
+import org.application.core.Location;
 import org.application.web.views.Desktop;
-import org.application.core.http.Response;
-import org.application.core.directrix.Property;
-import org.application.core.directrix.Directrix;
-import org.application.core.asynchronous.Promise;
-import org.application.core.asynchronous.ActionThen;
+import org.application.web.views.Curriculum;
+import org.application.core.elements.Document;
+import org.application.core.elements.html.Head;
 import de.inetsoftware.jwebassembly.api.annotation.Export;
 
 /**
- * @author felipe
+ * @author Felipe Juris Jacques
  */
 public class Application {
 
     @Export
     public static void main() {
         try {
-            Desktop desktop = new Desktop();
+            String path = Location.path();
+            Document document = Document.getInstance();
+            if (path.equals("/")) {
+                Head head = document.getHead();
+                head.addManifest("/source/assets/manifest.json");
+                Desktop desktop = new Desktop(document);
+            } else if (path.equals("/navigation/curriculum/")) {
+                Curriculum curriculum = new Curriculum(document.getBody());
+            }
         } catch (Throwable error) {
             Console.error(error);
         }
