@@ -1,0 +1,24 @@
+@inject Application.Source.Core.Context _context
+
+<svg xml:space="preserve" viewBox="0 0 @_width 100" width="@_width" height="100" zoomAndPan="enable">
+    <clipPath id="clip">
+        <polygon points="0,0 0,100 @_width,100 @_width,0 1,0" />
+    </clipPath>
+    <!-- <line stroke="#1a1a1a" stroke-width="1" x1="0" x2="@_width" y1="0" y2="1" clip-path="url(#clip)"></line> -->
+    <polygon fill="#00f2ff"
+        points="0,0 0,20 132,20 142,5 282,5 292,20 372,20 382,5 522,5 532,20 @_width,20 @_width,0 0,0"
+        clip-path="url(#clip)" />
+</svg>
+
+@code {
+    private int _width;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            _width = await _context.GetDisplay().GetWidth();
+            StateHasChanged();
+        }
+    }
+}
