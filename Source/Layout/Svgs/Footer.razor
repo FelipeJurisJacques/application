@@ -1,24 +1,41 @@
+@implements IObserver
+@using Application.Source.Utils.Observer
 @inject Application.Source.Core.Context _context
 
-<svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="0 0 @width 100" xmlns="http://www.w3.org/2000/svg">
     <clipPath id="clip">
-        <polygon points="0,0 0,100 @_width,100 @_width,0 1,0" />
+        <polygon points="0,0 0,100 @width,100 @width,0 1,0" />
     </clipPath>
-    <!-- <line stroke="#1a1a1a" stroke-width="1" x1="0" x2="@_width" y1="0" y2="1" clip-path="url(#clip)"></line> -->
+    <!-- <line stroke="#1a1a1a" stroke-width="1" x1="0" x2="@width" y1="0" y2="1" clip-path="url(#clip)"></line> -->
     <polygon fill="#00f2ff"
-        points="0,0 0,20 132,20 142,5 282,5 292,20 372,20 382,5 522,5 532,20 @_width,20 @_width,0 0,0"
+        points="0,0 0,20 132,20 142,5 282,5 292,20 372,20 382,5 522,5 532,20 @width,20 @width,0 0,0"
         clip-path="url(#clip)" />
 </svg>
 
 @code {
-    private int _width;
+    private int width;
+
+    protected override void OnInitialized()
+    {
+        _context.GetDisplay().OnResize().Subscribe(this);
+    }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
         {
-            _width = await _context.GetDisplay().GetWidth();
-            StateHasChanged();
+            await _update();
         }
+    }
+
+    public void Update()
+    {
+        _update();
+    }
+
+    private async Task _update()
+    {
+        width = await _context.GetDisplay().GetWidth();
+        StateHasChanged();
     }
 }

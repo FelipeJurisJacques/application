@@ -25,7 +25,15 @@ namespace Application.Source.Core
         [JSInvokable]
         public void OnEvent(string type)
         {
-            _js.InvokeVoidAsync("console.log", type);
+            switch (type)
+            {
+                case "resize":
+                    _display.OnResize().Notify();
+                    break;
+                default:
+                    _js.InvokeVoidAsync("console.log", type);
+                    break;
+            }
         }
     }
 }

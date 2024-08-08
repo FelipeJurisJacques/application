@@ -1,11 +1,19 @@
 using Microsoft.JSInterop;
+using Application.Source.Utils.Observer;
 
 namespace Application.Source.Core
 {
-    public class Display(IJSRuntime jsRuntime)
+    public class Display
     {
 
-        private readonly IJSRuntime _js = jsRuntime;
+        private readonly IJSRuntime _js;
+        private readonly OnResizeSubject _onResize;
+
+        public Display(IJSRuntime jsRuntime)
+        {
+            _js = jsRuntime;
+            _onResize = new OnResizeSubject();
+        }
 
         public async Task<int> GetWidth()
         {
@@ -16,5 +24,12 @@ namespace Application.Source.Core
         {
             return await _js.InvokeAsync<int>("eval", "window.innerHeight");
         }
+
+        public OnResizeSubject OnResize()
+        {
+            return _onResize;
+        }
+
+        public class OnResizeSubject : Subject { }
     }
 }
